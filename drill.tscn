@@ -1,0 +1,46 @@
+[gd_scene load_steps=8 format=3 uid="uid://monkduuu5cba"]
+
+[ext_resource type="Texture2D" uid="uid://csqlb4ynjwbro" path="res://assets/drill.png" id="1_o6rtg"]
+[ext_resource type="Script" path="res://drill.gd" id="2_te6ma"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tws5j"]
+atlas = ExtResource("1_o6rtg")
+region = Rect2(0, 0, 14, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uhg5h"]
+atlas = ExtResource("1_o6rtg")
+region = Rect2(14, 0, 14, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_whtaw"]
+atlas = ExtResource("1_o6rtg")
+region = Rect2(28, 0, 14, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hvdtu"]
+atlas = ExtResource("1_o6rtg")
+region = Rect2(42, 0, 14, 5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lvvoc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tws5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uhg5h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_whtaw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hvdtu")
+}],
+"loop": true,
+"name": &"drill",
+"speed": 10.0
+}]
+
+[node name="Drill" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_lvvoc")
+animation = &"drill"
+frame_progress = 0.284538
+script = ExtResource("2_te6ma")

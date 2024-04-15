@@ -1,0 +1,108 @@
+[gd_scene load_steps=17 format=3 uid="uid://c6c1qt6n6vcex"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_bvfsr"]
+[ext_resource type="Texture2D" uid="uid://c8xfj67d3jn72" path="res://assets/player_down.png" id="1_qhk4b"]
+[ext_resource type="Texture2D" uid="uid://gdio74efinfk" path="res://assets/player_right.png" id="2_xes56"]
+[ext_resource type="Texture2D" uid="uid://csbvb04m4f72k" path="res://assets/player_up.png" id="3_hnbr8"]
+[ext_resource type="PackedScene" uid="uid://monkduuu5cba" path="res://drill.tscn" id="5_sorlu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hqvu"]
+atlas = ExtResource("1_qhk4b")
+region = Rect2(0, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_144rn"]
+atlas = ExtResource("1_qhk4b")
+region = Rect2(10, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwjej"]
+atlas = ExtResource("1_qhk4b")
+region = Rect2(20, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vpqqr"]
+atlas = ExtResource("2_xes56")
+region = Rect2(0, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ulrv"]
+atlas = ExtResource("2_xes56")
+region = Rect2(10, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4tnqs"]
+atlas = ExtResource("2_xes56")
+region = Rect2(20, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8vik"]
+atlas = ExtResource("3_hnbr8")
+region = Rect2(0, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s6bxu"]
+atlas = ExtResource("3_hnbr8")
+region = Rect2(10, 0, 10, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fna8y"]
+atlas = ExtResource("3_hnbr8")
+region = Rect2(20, 0, 10, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xcc5t"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hqvu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_144rn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwjej")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vpqqr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ulrv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4tnqs")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8vik")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s6bxu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fna8y")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3awcs"]
+radius = 6.0
+height = 22.0
+
+[node name="Player" type="Area2D"]
+position = Vector2(3, 0)
+script = ExtResource("1_bvfsr")
+metadata/_edit_group_ = true
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_xcc5t")
+animation = &"walk_up"
+frame_progress = 0.853395
+
+[node name="Drill" parent="PlayerSprite" instance=ExtResource("5_sorlu")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_3awcs")
