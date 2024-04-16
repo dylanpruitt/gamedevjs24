@@ -121,6 +121,7 @@ position = Vector2(108, 620)
 [connection signal="visibility_changed" from="PauseMenu" to="." method="_on_pause_menu_visibility_changed"]
 [connection signal="health_changed" from="Player" to="." method="_on_player_health_changed"]
 [connection signal="power_changed" from="Player" to="HUD" method="_on_player_power_changed"]
+[connection signal="stopped_charging" from="Player" to="Ship" method="_on_player_stopped_charging"]
 [connection signal="health_changed" from="Player/HealthComponent" to="Player" method="_on_health_component_health_changed"]
 [connection signal="clock_updated" from="Clock" to="." method="_on_clock_updated"]
 [connection signal="charging_items" from="Ship" to="Player" method="_on_ship_charging_items"]

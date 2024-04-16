@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 signal health_changed(old,new)
 signal power_changed(old,new)
+signal stopped_charging
 
 var PLAYER_SPEED = 100
 var power = 500
@@ -65,6 +66,9 @@ func _process(delta):
 
 	if charging:
 		add_power(charge_rate * delta)
+		if power == max_power:
+			charging = false
+			stopped_charging.emit()
 
 func _input(event):
 	if event is InputEventMouseMotion:
@@ -96,6 +100,7 @@ func _on_flashlight_drained_power(delta):
 func _on_ship_charging_items(is_charging):
 	if is_charging:
 		print("charging power...")
+		$PlayerSprite/Flashlight.toggled = false
 	else:
 		print("stopped charging")
 
