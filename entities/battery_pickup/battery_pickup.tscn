@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cx07ehh4wopf0"]
+
+[ext_resource type="Texture2D" uid="uid://dv5urvhd456jt" path="res://assets/battery_pickup.png" id="1_i6whb"]
+[ext_resource type="Script" path="res://entities/battery_pickup/battery_pickup.gd" id="1_ne8of"]
+[ext_resource type="Texture2D" uid="uid://bhn40lsxnxm6x" path="res://assets/neutral_light_texture_96.webp" id="3_t8dt1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_adwkf"]
+size = Vector2(20, 12)
+
+[node name="BatteryPickup" type="Area2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_ne8of")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_i6whb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_adwkf")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.5
+texture = ExtResource("3_t8dt1")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7rj44d2gu3qk"]
+
+[ext_resource type="Script" path="res://clock.gd" id="1_60rp3"]
+
+[node name="Clock" type="Node"]
+script = ExtResource("1_60rp3")
+
+[node name="UpdateTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]

@@ -1,15 +1,12 @@
-[gd_scene load_steps=17 format=3 uid="uid://i5iyab4k5qyh"]
+[gd_scene load_steps=11 format=3 uid="uid://i5iyab4k5qyh"]
 
-[ext_resource type="PackedScene" uid="uid://daa0metoxw5bj" path="res://ui/hud.tscn" id="1_0hk7k"]
+[ext_resource type="PackedScene" uid="uid://daa0metoxw5bj" path="res://hud.tscn" id="1_0hk7k"]
 [ext_resource type="Script" path="res://main.gd" id="1_ldknm"]
-[ext_resource type="PackedScene" uid="uid://coip3sgektltw" path="res://ui/pause_menu.tscn" id="4_4gvw1"]
-[ext_resource type="PackedScene" uid="uid://c6c1qt6n6vcex" path="res://entities/player/player.tscn" id="4_4qah8"]
+[ext_resource type="PackedScene" uid="uid://coip3sgektltw" path="res://pause_menu.tscn" id="4_4gvw1"]
+[ext_resource type="PackedScene" uid="uid://c6c1qt6n6vcex" path="res://player.tscn" id="4_4qah8"]
 [ext_resource type="PackedScene" uid="uid://b7rj44d2gu3qk" path="res://clock.tscn" id="6_wrasq"]
-[ext_resource type="PackedScene" uid="uid://ns673t3xmqdc" path="res://entities/rock/rock.tscn" id="7_pbey5"]
+[ext_resource type="PackedScene" uid="uid://ns673t3xmqdc" path="res://rock.tscn" id="7_pbey5"]
 [ext_resource type="Texture2D" uid="uid://bcdm204uwks8p" path="res://assets/tiles/tileset_blue.png" id="7_svwk8"]
-[ext_resource type="PackedScene" uid="uid://bxw7gxj4gpvc3" path="res://entities/coal_rock/coal_rock.tscn" id="8_wmo1i"]
-[ext_resource type="PackedScene" uid="uid://cx07ehh4wopf0" path="res://entities/battery_pickup/battery_pickup.tscn" id="9_tcb8q"]
-[ext_resource type="PackedScene" uid="uid://xc3eumu5bgcd" path="res://entities/ship/ship.tscn" id="10_87cvs"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_x287l"]
 vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
@@ -17,12 +14,6 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
 source_geometry_group_name = &"navigation_polygon_source_group"
 agent_radius = 0.0
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dcmd6"]
-polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ufo8h"]
-polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q3myi"]
 texture = ExtResource("7_svwk8")
@@ -48,12 +39,10 @@ texture_region_size = Vector2i(32, 32)
 4:0/0/physics_layer_0/angular_velocity = 0.0
 4:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x287l")
 5:0/0 = 0
-5:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_dcmd6")
 5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:0/0/physics_layer_0/angular_velocity = 0.0
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:0/0 = 0
-6:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_ufo8h")
 6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:0/0/physics_layer_0/angular_velocity = 0.0
 6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
@@ -65,13 +54,10 @@ physics_layer_0/collision_layer = 1
 navigation_layer_0/layers = 1
 sources/2 = SubResource("TileSetAtlasSource_q3myi")
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yb8g7"]
-
 [node name="Main" type="Node"]
 script = ExtResource("1_ldknm")
 
 [node name="TileMap" type="TileMap" parent="."]
-visible = false
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_ca22c")
 format = 2
@@ -102,28 +88,11 @@ position = Vector2(99, 291)
 [node name="Rock4" parent="." instance=ExtResource("7_pbey5")]
 position = Vector2(506, 262)
 
-[node name="CoalRock" parent="." instance=ExtResource("8_wmo1i")]
-position = Vector2(328, 362)
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-material = SubResource("CanvasItemMaterial_yb8g7")
-color = Color(0.00392157, 0.00784314, 0.0196078, 1)
-
-[node name="BatteryPickup" parent="." instance=ExtResource("9_tcb8q")]
-position = Vector2(315, 283)
-
-[node name="Ship" parent="." instance=ExtResource("10_87cvs")]
-position = Vector2(108, 620)
-
 [connection signal="pressed_exit_button" from="PauseMenu" to="." method="_on_pause_menu_pressed_exit_button"]
 [connection signal="pressed_resume_button" from="PauseMenu" to="." method="_on_pause_menu_pressed_resume_button"]
 [connection signal="visibility_changed" from="PauseMenu" to="." method="_on_pause_menu_visibility_changed"]
 [connection signal="health_changed" from="Player" to="." method="_on_player_health_changed"]
-[connection signal="power_changed" from="Player" to="HUD" method="_on_player_power_changed"]
 [connection signal="health_changed" from="Player/HealthComponent" to="Player" method="_on_health_component_health_changed"]
 [connection signal="clock_updated" from="Clock" to="." method="_on_clock_updated"]
-[connection signal="charging_items" from="Ship" to="Player" method="_on_ship_charging_items"]
-[connection signal="left_moon" from="Ship" to="." method="_on_ship_left_moon"]
 
 [editable path="Player"]

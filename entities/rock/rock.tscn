@@ -1,0 +1,44 @@
+[gd_scene load_steps=8 format=3 uid="uid://ns673t3xmqdc"]
+
+[ext_resource type="Script" path="res://entities/rock/rock.gd" id="1_k1uwu"]
+[ext_resource type="PackedScene" uid="uid://wniglcht6m3o" path="res://components/health_component.tscn" id="1_sqinb"]
+[ext_resource type="Texture2D" uid="uid://bdek8gxgoe0o3" path="res://assets/rock.png" id="2_gfpic"]
+[ext_resource type="Texture2D" uid="uid://ds6ilfn73ep5q" path="res://assets/tiles/rock_particle.png" id="4_r8dqe"]
+[ext_resource type="PackedScene" uid="uid://v2pevsxqgv1e" path="res://components/value_component.tscn" id="5_0x6vk"]
+[ext_resource type="PackedScene" uid="uid://bjnll04vmh00" path="res://components/name_component.tscn" id="6_twf41"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8cl2t"]
+size = Vector2(12.75, 10)
+
+[node name="Rock" type="RigidBody2D"]
+gravity_scale = 0.0
+script = ExtResource("1_k1uwu")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_8cl2t")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_gfpic")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_sqinb")]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 0.38
+randomness = 0.39
+texture = ExtResource("4_r8dqe")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 90.91
+
+[node name="ValueComponent" parent="." instance=ExtResource("5_0x6vk")]
+
+[node name="NameComponent" parent="." instance=ExtResource("6_twf41")]
+
+[connection signal="entity_died" from="HealthComponent" to="." method="_on_entity_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_changed"]

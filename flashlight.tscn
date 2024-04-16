@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0rl6ym1o7ku1"]
+
+[ext_resource type="Script" path="res://flashlight.gd" id="2_7pxuh"]
+[ext_resource type="Texture2D" uid="uid://ctv6t6bwik104" path="res://assets/flashlight.png" id="2_7qpma"]
+[ext_resource type="Script" path="res://components/power_drain.gd" id="3_vvrij"]
+[ext_resource type="Texture2D" uid="uid://clxr2d57y01p4" path="res://assets/lighting_test2.png" id="4_byg5b"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dwyyi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_7qpma")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Flashlight" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_dwyyi")
+script = ExtResource("2_7pxuh")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+collide_with_areas = true
+
+[node name="PowerDrainComponent" type="Node" parent="."]
+script = ExtResource("3_vvrij")
+power_drain = 10
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(35, 0)
+energy = 0.65
+texture = ExtResource("4_byg5b")

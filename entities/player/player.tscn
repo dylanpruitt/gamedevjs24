@@ -1,10 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://c6c1qt6n6vcex"]
+[gd_scene load_steps=20 format=3 uid="uid://c6c1qt6n6vcex"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_bvfsr"]
+[ext_resource type="Script" path="res://entities/player/player.gd" id="1_bvfsr"]
 [ext_resource type="Texture2D" uid="uid://c8xfj67d3jn72" path="res://assets/player_down.png" id="1_qhk4b"]
 [ext_resource type="Texture2D" uid="uid://gdio74efinfk" path="res://assets/player_right.png" id="2_xes56"]
 [ext_resource type="Texture2D" uid="uid://csbvb04m4f72k" path="res://assets/player_up.png" id="3_hnbr8"]
 [ext_resource type="PackedScene" uid="uid://monkduuu5cba" path="res://drill.tscn" id="5_sorlu"]
+[ext_resource type="PackedScene" uid="uid://wniglcht6m3o" path="res://components/health_component.tscn" id="6_7mwk8"]
+[ext_resource type="PackedScene" uid="uid://c0rl6ym1o7ku1" path="res://flashlight.tscn" id="6_lkgct"]
+[ext_resource type="Texture2D" uid="uid://bhn40lsxnxm6x" path="res://assets/neutral_light_texture_96.webp" id="8_4egi1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0hqvu"]
 atlas = ExtResource("1_qhk4b")
@@ -89,20 +92,36 @@ animations = [{
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3awcs"]
 radius = 6.0
-height = 22.0
+height = 52.0
 
-[node name="Player" type="Area2D"]
-position = Vector2(3, 0)
+[node name="Player" type="CharacterBody2D"]
+position = Vector2(103, 146)
 script = ExtResource("1_bvfsr")
 metadata/_edit_group_ = true
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_xcc5t")
-animation = &"walk_up"
-frame_progress = 0.853395
+animation = &"walk_down"
 
 [node name="Drill" parent="PlayerSprite" instance=ExtResource("5_sorlu")]
+position = Vector2(0, 4)
+
+[node name="Flashlight" parent="PlayerSprite" instance=ExtResource("6_lkgct")]
+position = Vector2(0, 4)
+toggled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_3awcs")
+
+[node name="HealthComponent" parent="." instance=ExtResource("6_7mwk8")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.85
+texture = ExtResource("8_4egi1")
+
+[connection signal="drain_power" from="PlayerSprite/Drill" to="." method="_on_drill_drained_power"]
+[connection signal="drain_power" from="PlayerSprite/Flashlight" to="." method="_on_flashlight_drained_power"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_changed"]

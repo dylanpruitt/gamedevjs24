@@ -1,0 +1,126 @@
+[gd_scene load_steps=11 format=3 uid="uid://xc3eumu5bgcd"]
+
+[ext_resource type="Script" path="res://entities/ship/ship.gd" id="1_is2hi"]
+[ext_resource type="Texture2D" uid="uid://nywunn4pn0ha" path="res://assets/ship.png" id="2_m63xm"]
+[ext_resource type="Texture2D" uid="uid://dsgyrgoiwx867" path="res://assets/ship_exterior.png" id="3_81255"]
+[ext_resource type="Texture2D" uid="uid://cw62jp7dg44kb" path="res://assets/ship_ramp.png" id="3_v77o6"]
+[ext_resource type="Texture2D" uid="uid://ci2jv2wh3snrg" path="res://assets/arrow_left.png" id="4_yon06"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_jf1nx"]
+a = Vector2(-4.125, -1.5)
+b = Vector2(4.125, 5.25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3qfi5"]
+size = Vector2(39, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_onuqe"]
+size = Vector2(6, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vv2uq"]
+size = Vector2(39, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iu2u5"]
+size = Vector2(32.5, 21.5)
+
+[node name="Ship" type="RigidBody2D"]
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_is2hi")
+metadata/_edit_group_ = true
+
+[node name="ShipSprite" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_m63xm")
+
+[node name="ShipExteriorSprite" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(18, 18)
+scale = Vector2(4, 4)
+texture = ExtResource("3_81255")
+
+[node name="Ramp" type="RigidBody2D" parent="."]
+z_index = -1
+position = Vector2(110, 67)
+gravity_scale = 0.0
+lock_rotation = true
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Ramp"]
+scale = Vector2(4, 4)
+texture = ExtResource("3_v77o6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ramp"]
+position = Vector2(-3.5, -2)
+scale = Vector2(4, 4)
+shape = SubResource("SegmentShape2D_jf1nx")
+
+[node name="BottomCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(16.5, 68.5)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_3qfi5")
+
+[node name="LeftCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-49, 15)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_onuqe")
+
+[node name="TopCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(17, -31)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_vv2uq")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(167, 13)
+scale = Vector2(4, 4)
+texture = ExtResource("4_yon06")
+
+[node name="InnerArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InnerArea"]
+position = Vector2(17, 15)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_iu2u5")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 108.0
+offset_top = -33.0
+offset_right = 199.0
+offset_bottom = -2.0
+
+[node name="LeaveButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = -202.0
+offset_top = -68.0
+offset_right = -122.0
+offset_bottom = -37.0
+focus_neighbor_right = NodePath("../ChargeItemsButton")
+focus_next = NodePath("../ChargeItemsButton")
+focus_previous = NodePath("../ChargeItemsButton")
+text = "Leave"
+
+[node name="ChargeItemsButton" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = -61.0
+offset_top = -68.0
+offset_right = 49.0
+offset_bottom = -37.0
+focus_neighbor_left = NodePath("../LeaveButton")
+focus_next = NodePath("../LeaveButton")
+focus_previous = NodePath("../LeaveButton")
+text = "Charge items"
+
+[node name="Label" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = -71.0
+offset_top = -96.0
+offset_right = 65.0
+offset_bottom = -73.0
+text = "Charging power..."
+
+[connection signal="body_entered" from="InnerArea" to="." method="_on_inner_area_body_entered"]
+[connection signal="body_exited" from="InnerArea" to="." method="_on_inner_area_body_exited"]
+[connection signal="pressed" from="Control/LeaveButton" to="." method="_on_leave_button_pressed"]
+[connection signal="pressed" from="Control/ChargeItemsButton" to="." method="_on_charge_items_button_pressed"]
