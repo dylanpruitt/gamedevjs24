@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxw7gxj4gpvc3"]
+[gd_scene load_steps=10 format=3 uid="uid://bxw7gxj4gpvc3"]
 
 [ext_resource type="Script" path="res://entities/rock/rock.gd" id="1_76s8x"]
 [ext_resource type="Texture2D" uid="uid://b6y80mifja270" path="res://assets/coal_rock.png" id="2_k7t8a"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://v2pevsxqgv1e" path="res://components/value_component.tscn" id="5_ad7mu"]
 [ext_resource type="PackedScene" uid="uid://bjnll04vmh00" path="res://components/name_component.tscn" id="6_b6e6p"]
 [ext_resource type="Texture2D" uid="uid://bhn40lsxnxm6x" path="res://assets/neutral_light_texture_96.webp" id="7_gqlda"]
+[ext_resource type="AudioStream" uid="uid://dai4sdbvm42dg" path="res://assets/sfx/rock_breaking.wav" id="8_icebh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8cl2t"]
 size = Vector2(12.75, 10)
@@ -48,6 +49,10 @@ entity_name = "Coal"
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
 texture = ExtResource("7_gqlda")
+
+[node name="BreakSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_icebh")
+volume_db = -8.0
 
 [connection signal="entity_died" from="HealthComponent" to="." method="_on_entity_died"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_changed"]

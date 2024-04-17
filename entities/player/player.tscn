@@ -119,8 +119,9 @@ shape = SubResource("CapsuleShape2D_3awcs")
 [node name="Camera2D" type="Camera2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-energy = 0.85
 texture = ExtResource("8_4egi1")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [connection signal="drain_power" from="PlayerSprite/Drill" to="." method="_on_drill_drained_power"]
 [connection signal="drain_power" from="PlayerSprite/Flashlight" to="." method="_on_flashlight_drained_power"]

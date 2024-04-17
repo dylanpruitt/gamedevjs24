@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cx07ehh4wopf0"]
+[gd_scene load_steps=6 format=3 uid="uid://cx07ehh4wopf0"]
 
 [ext_resource type="Texture2D" uid="uid://dv5urvhd456jt" path="res://assets/battery_pickup.png" id="1_i6whb"]
 [ext_resource type="Script" path="res://entities/battery_pickup/battery_pickup.gd" id="1_ne8of"]
 [ext_resource type="Texture2D" uid="uid://bhn40lsxnxm6x" path="res://assets/neutral_light_texture_96.webp" id="3_t8dt1"]
+[ext_resource type="AudioStream" uid="uid://ga33jts4qhke" path="res://assets/sfx/item_pickup.ogg" id="4_bbbpo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_adwkf"]
 size = Vector2(20, 12)
@@ -22,5 +23,8 @@ shape = SubResource("RectangleShape2D_adwkf")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 energy = 0.5
 texture = ExtResource("3_t8dt1")
+
+[node name="PickupSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_bbbpo")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -15,4 +15,8 @@ func _on_body_entered(body):
 	# Kind of hacky, but if the player is colliding, give them power.
 	if body.power:
 		body.add_power(power_gain)
+		$PickupSFX.play()
+		$CollisionShape2D.queue_free()
+		$Sprite2D.queue_free()
+		await $PickupSFX.finished
 		queue_free()

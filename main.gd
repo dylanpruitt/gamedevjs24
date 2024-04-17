@@ -1,6 +1,5 @@
 extends Node
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$PauseMenu.hide()
@@ -19,6 +18,8 @@ func _process(delta):
 		$PauseMenu.show()
 		$PauseMenu/ResumeButton.grab_focus()
 		get_tree().paused = true
+	if Input.is_action_just_pressed("test"):
+		$CanvasModulate.visible = !$CanvasModulate.visible
 
 func _on_pause_menu_pressed_resume_button():
 	print("Unpaused game")

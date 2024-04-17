@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c0rl6ym1o7ku1"]
+[gd_scene load_steps=7 format=3 uid="uid://c0rl6ym1o7ku1"]
 
 [ext_resource type="Script" path="res://flashlight.gd" id="2_7pxuh"]
 [ext_resource type="Texture2D" uid="uid://ctv6t6bwik104" path="res://assets/flashlight.png" id="2_7qpma"]
 [ext_resource type="Script" path="res://components/power_drain.gd" id="3_vvrij"]
 [ext_resource type="Texture2D" uid="uid://clxr2d57y01p4" path="res://assets/lighting_test2.png" id="4_byg5b"]
+[ext_resource type="AudioStream" uid="uid://borcu5qqbnyhc" path="res://assets/sfx/flashlight_toggle.wav" id="5_e3gey"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_dwyyi"]
 animations = [{
@@ -31,3 +32,7 @@ power_drain = 10
 position = Vector2(35, 0)
 energy = 0.65
 texture = ExtResource("4_byg5b")
+
+[node name="ToggleSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_e3gey")
+volume_db = -8.0

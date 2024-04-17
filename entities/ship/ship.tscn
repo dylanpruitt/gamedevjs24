@@ -84,28 +84,22 @@ shape = SubResource("RectangleShape2D_iu2u5")
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 108.0
-offset_top = -33.0
-offset_right = 199.0
-offset_bottom = -2.0
 
 [node name="LeaveButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = -202.0
-offset_top = -68.0
-offset_right = -122.0
-offset_bottom = -37.0
+offset_left = -94.0
+offset_top = -99.0
+offset_right = -14.0
+offset_bottom = -68.0
 focus_neighbor_right = NodePath("../ChargeItemsButton")
 focus_next = NodePath("../ChargeItemsButton")
 focus_previous = NodePath("../ChargeItemsButton")
 text = "Leave"
 
 [node name="ChargeItemsButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = -61.0
-offset_top = -68.0
-offset_right = 49.0
-offset_bottom = -37.0
+offset_left = 47.0
+offset_top = -99.0
+offset_right = 157.0
+offset_bottom = -68.0
 focus_neighbor_left = NodePath("../LeaveButton")
 focus_next = NodePath("../LeaveButton")
 focus_previous = NodePath("../LeaveButton")
@@ -113,11 +107,10 @@ text = "Charge items"
 
 [node name="Label" type="Label" parent="Control"]
 visible = false
-layout_mode = 0
-offset_left = -71.0
-offset_top = -96.0
-offset_right = 65.0
-offset_bottom = -73.0
+offset_left = 36.0
+offset_top = -126.0
+offset_right = 172.0
+offset_bottom = -103.0
 text = "Charging power..."
 
 [connection signal="body_entered" from="InnerArea" to="." method="_on_inner_area_body_entered"]

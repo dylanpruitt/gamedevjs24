@@ -18,5 +18,6 @@ func _process(delta):
 		drain_power.emit($PowerDrainComponent.power_drain * delta)
 	if Input.is_action_just_pressed("toggle_flashlight"):
 		toggled = !toggled
-		$PointLight2D.enabled = toggled
 		visible = !visible
+		$PointLight2D.enabled = toggled
+		$ToggleSFX.play()
