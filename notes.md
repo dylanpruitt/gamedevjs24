@@ -25,8 +25,22 @@ made simple camera
 Made dictionary of collected items
 implemented drill power drain; started on results screen, tested first web export
 made basic flashlight
+made ship
+added sfx
 
-(3-4 hours so far)
+(8-9 hours so far)
+
+##### 04/17
+
+added game over screen
+started on shop screen
+modified results screen, goes to shop screen now so that's cool
+started connecting UI screens
+can no longer use tools if player power <= 0
+finally added footsteps
+added explosions/bombs (but explosions need some tuning, range doesn't match sprite)
+
+(11-12 hours so far)
 
 TODO pause menu [x]
 player movement?
@@ -37,3 +51,11 @@ shop screen
 globals
 lighting
 tilemaps
+overtime pay
+todo get charging sfx
+
+
+10/s - drill
+
+15m rock - 6s
+30m coal - 12s

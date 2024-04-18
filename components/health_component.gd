@@ -13,7 +13,7 @@ func heal(dh):
 		health += dh
 
 func take_damage(dh, damage_type):
-	if damage_type == weak_type:
+	if damage_type == weak_type or damage_type == "env":
 		health_changed.emit(health, health - dh)
 		health -= dh
 		if health <= 0:

@@ -1,0 +1,124 @@
+[gd_scene load_steps=9 format=3 uid="uid://butmr7erferem"]
+
+[ext_resource type="Texture2D" uid="uid://cpbs6cgm0dr4p" path="res://assets/brian_sketch.png" id="1_jnktt"]
+[ext_resource type="Script" path="res://ui/brian.gd" id="1_pyxk8"]
+[ext_resource type="Script" path="res://ui/shop_screen.gd" id="1_sejj0"]
+[ext_resource type="AudioStream" uid="uid://biwwd82c5wlfq" path="res://assets/music/shop.ogg" id="3_q8i1k"]
+[ext_resource type="AudioStream" uid="uid://bm75dtxpyuoad" path="res://assets/sfx/money.wav" id="4_jqrre"]
+[ext_resource type="Script" path="res://ui/buyable_item.gd" id="6_6u6pv"]
+[ext_resource type="PackedScene" uid="uid://dimlx1bs11c3" path="res://components/price_component.tscn" id="6_oosfl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm8mk"]
+size = Vector2(246, 437)
+
+[node name="ShopScreen" type="CanvasLayer"]
+script = ExtResource("1_sejj0")
+
+[node name="Brian" type="Area2D" parent="."]
+position = Vector2(153, 405)
+script = ExtResource("1_pyxk8")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Brian"]
+scale = Vector2(4, 4)
+texture = ExtResource("1_jnktt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Brian"]
+position = Vector2(-3, -4.5)
+shape = SubResource("RectangleShape2D_nm8mk")
+
+[node name="TabContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_right = -40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="ItemTab" type="Button" parent="TabContainer"]
+layout_mode = 0
+offset_left = -50.0
+offset_top = 16.0
+offset_right = 150.0
+offset_bottom = 74.0
+theme_override_font_sizes/font_size = 36
+text = "Items"
+
+[node name="UpgradeTab" type="Button" parent="TabContainer"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 146.0
+offset_top = 16.0
+offset_right = 346.0
+offset_bottom = 74.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 36
+text = "Upgrades"
+
+[node name="BuyableItem" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 379.0
+offset_top = 199.0
+offset_right = 419.0
+offset_bottom = 239.0
+script = ExtResource("6_6u6pv")
+
+[node name="Label" type="Label" parent="BuyableItem"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -17.0
+offset_right = 131.0
+offset_bottom = 17.0
+grow_vertical = 2
+tooltip_text = "Used to blow up rocks in mining."
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Bomb - $30"
+
+[node name="Button" type="Button" parent="BuyableItem"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 180.0
+offset_top = -15.5
+offset_right = 276.0
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Buy item"
+
+[node name="PriceComponent" parent="BuyableItem" instance=ExtResource("6_oosfl")]
+
+[node name="MoneyLabel" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -160.0
+offset_top = 10.0
+offset_right = -79.0
+offset_bottom = 77.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 48
+text = "$30"
+
+[node name="ShopBGM" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_q8i1k")
+autoplay = true
+
+[node name="BuySFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_jqrre")
+volume_db = 6.0
+
+[connection signal="pressed" from="BuyableItem/Button" to="BuyableItem" method="_on_button_pressed"]
+[connection signal="item_bought" from="BuyableItem/PriceComponent" to="." method="_on_item_bought"]
+[connection signal="too_broke" from="BuyableItem/PriceComponent" to="." method="_on_too_broke"]

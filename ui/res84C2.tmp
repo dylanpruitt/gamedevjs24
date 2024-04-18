@@ -1,9 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://be8rkdocoul65"]
+[gd_scene load_steps=2 format=3 uid="uid://be8rkdocoul65"]
 
 [ext_resource type="Script" path="res://ui/result_screen.gd" id="1_g1p18"]
-[ext_resource type="AudioStream" uid="uid://cuyi2pix3iw0s" path="res://assets/sfx/typewriter_click.wav" id="2_1npgg"]
-[ext_resource type="AudioStream" uid="uid://dsm2qvxqqvt6p" path="res://assets/sfx/quota_met.wav" id="2_sj41i"]
-[ext_resource type="AudioStream" uid="uid://cge2g5e3qjoru" path="res://assets/sfx/quota_not_met.wav" id="4_m28xj"]
 
 [node name="ResultsScreen" type="CanvasLayer"]
 script = ExtResource("1_g1p18")
@@ -73,21 +70,11 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -83.5
 offset_top = -98.0
-offset_right = 96.5
+offset_right = 83.5
 offset_bottom = -40.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 36
 text = "Continue"
-
-[node name="TypewriterClickSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_1npgg")
-
-[node name="QuotaMetSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("2_sj41i")
-
-[node name="QuotaNotMetSFX" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_m28xj")
-volume_db = 6.0
 
 [connection signal="pressed" from="Continue" to="." method="_on_continue_pressed"]

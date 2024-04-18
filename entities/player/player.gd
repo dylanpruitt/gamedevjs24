@@ -48,7 +48,8 @@ func _process(delta):
 		$PlayerSprite/Flashlight.visible = true
 	else:
 		$PlayerSprite/Drill.show()
-		$PlayerSprite/Drill.play()
+		if power > 0:
+			$PlayerSprite/Drill.play()
 		$PlayerSprite/Flashlight.visible = false
 	
 	if !using_drill:
@@ -61,6 +62,8 @@ func _process(delta):
 		
 		move_and_slide()
 		$PlayerSprite.play(animation_to_play)
+		if !$FootstepSFX.playing:
+			$FootstepSFX.play()
 	else:
 		$PlayerSprite.stop()
 
@@ -69,6 +72,13 @@ func _process(delta):
 		if power == max_power:
 			charging = false
 			stopped_charging.emit()
+
+	if power <= 0:
+		$PlayerSprite/Drill.out_of_power = true
+		$PlayerSprite/Flashlight.out_of_power = true
+	else:
+		$PlayerSprite/Drill.out_of_power = false
+		$PlayerSprite/Flashlight.out_of_power = false
 
 func _input(event):
 	if event is InputEventMouseMotion:

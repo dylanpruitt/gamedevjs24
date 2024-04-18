@@ -6,6 +6,7 @@ signal drain_power(power)
 
 var flashlight_range = 50
 var flashlight_energy = 0.8
+var out_of_power = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,10 +15,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if toggled:
+	if toggled and !out_of_power:
 		drain_power.emit($PowerDrainComponent.power_drain * delta)
 	if Input.is_action_just_pressed("toggle_flashlight"):
-		toggled = !toggled
-		visible = !visible
-		$PointLight2D.enabled = toggled
-		$ToggleSFX.play()
+		toggle_light()
+
+	if out_of_power and toggled:
+		toggle_light()
+
+func toggle_light():
+	toggled = !toggled
+	visible = !visible
+	$PointLight2D.enabled = toggled
+	$ToggleSFX.play()

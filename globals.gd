@@ -3,7 +3,19 @@ extends Node2D
 signal score_changed
 
 var player_score = 0
+var player_money = 100
 var player_found_items = {}
+
+var quota = 15
+
+enum CausesOfDeath {
+	TERMINATED,
+	KILLED,
+	MISSING
+}
+
+var cause_of_death
+var death_description
 
 func add_found_item(item):
 	# item is tuple with [name, value]

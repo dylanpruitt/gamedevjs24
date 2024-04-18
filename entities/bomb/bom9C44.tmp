@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5t7jdvdqdicc"]
+
+[ext_resource type="Script" path="res://entities/bomb/bomb.gd" id="1_43yu4"]
+[ext_resource type="PackedScene" uid="uid://wniglcht6m3o" path="res://components/health_component.tscn" id="1_d6tp3"]
+[ext_resource type="Texture2D" uid="uid://rfrhohelf7ev" path="res://assets/bomb.png" id="2_s31ic"]
+[ext_resource type="Texture2D" uid="uid://dmyefpxne14pu" path="res://assets/bomb_particle.png" id="3_cutwn"]
+[ext_resource type="Texture2D" uid="uid://bhn40lsxnxm6x" path="res://assets/neutral_light_texture_96.webp" id="4_ewfix"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ugt56"]
+radius = 8.0
+
+[node name="Bomb" type="RigidBody2D"]
+script = ExtResource("1_43yu4")
+metadata/_edit_group_ = true
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_d6tp3")]
+weak_type = "sword"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_s31ic")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_ugt56")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(2, -10)
+amount = 12
+randomness = 0.22
+texture = ExtResource("3_cutwn")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 20.2
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(2, -10)
+color = Color(0.866667, 0.466667, 0.266667, 1)
+energy = 0.7
+texture = ExtResource("4_ewfix")

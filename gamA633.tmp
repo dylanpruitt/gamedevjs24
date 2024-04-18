@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://boq7gv5t3538s"]
+
+[ext_resource type="Script" path="res://ui/game_over_screen.gd" id="1_hhtdj"]
+[ext_resource type="AudioStream" uid="uid://cuyi2pix3iw0s" path="res://assets/sfx/typewriter_click.wav" id="2_p53t2"]
+
+[node name="GameOverScreen" type="CanvasLayer"]
+script = ExtResource("1_hhtdj")
+
+[node name="TypewriterClickSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_p53t2")

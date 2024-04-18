@@ -3,7 +3,8 @@ extends AnimatedSprite2D
 signal drain_power(power)
 
 var drill_range = 20
-var drill_power = 20
+var drill_power = 5
+var out_of_power = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,7 +13,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) and !out_of_power:
 		drain_power.emit($PowerDrainComponent.power_drain * delta)
 		var mouse_position = get_local_mouse_position()
 

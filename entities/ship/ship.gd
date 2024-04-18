@@ -32,6 +32,7 @@ func _on_leave_button_pressed():
 
 func _on_charge_items_button_pressed():
 	$Control/Label.show()
+	$ChargeStartSFX.play()
 	charging_items.emit(true)
 
 func _on_player_stopped_charging():
