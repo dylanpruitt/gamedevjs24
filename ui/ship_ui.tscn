@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://c2fxn3d0xt32m"]
+
+[ext_resource type="Texture2D" uid="uid://ci2jv2wh3snrg" path="res://assets/arrow_left.png" id="1_5yjc0"]
+
+[node name="ShipUI" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="LeaveButton" type="Button" parent="."]
+offset_left = -94.0
+offset_top = -99.0
+offset_right = -14.0
+offset_bottom = -68.0
+focus_neighbor_right = NodePath("../ChargeItemsButton")
+focus_next = NodePath("../ChargeItemsButton")
+focus_previous = NodePath("../ChargeItemsButton")
+text = "Leave"
+
+[node name="ChargeItemsButton" type="Button" parent="."]
+offset_left = 47.0
+offset_top = -99.0
+offset_right = 157.0
+offset_bottom = -68.0
+focus_neighbor_left = NodePath("../LeaveButton")
+focus_next = NodePath("../LeaveButton")
+focus_previous = NodePath("../LeaveButton")
+text = "Charge items"
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = 36.0
+offset_top = -126.0
+offset_right = 172.0
+offset_bottom = -103.0
+text = "Charging power..."
+
+[node name="ShipArrow" type="Sprite2D" parent="."]
+use_parent_material = true
+position = Vector2(167, 13)
+scale = Vector2(4, 4)
+texture = ExtResource("1_5yjc0")

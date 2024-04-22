@@ -1,90 +1,178 @@
-[gd_scene load_steps=19 format=3 uid="uid://i5iyab4k5qyh"]
+[gd_scene load_steps=27 format=3 uid="uid://i5iyab4k5qyh"]
 
 [ext_resource type="PackedScene" uid="uid://daa0metoxw5bj" path="res://ui/hud.tscn" id="1_0hk7k"]
 [ext_resource type="Script" path="res://main.gd" id="1_ldknm"]
 [ext_resource type="PackedScene" uid="uid://coip3sgektltw" path="res://ui/pause_menu.tscn" id="4_4gvw1"]
 [ext_resource type="PackedScene" uid="uid://c6c1qt6n6vcex" path="res://entities/player/player.tscn" id="4_4qah8"]
+[ext_resource type="Texture2D" uid="uid://b08sbv53r7kl7" path="res://assets/tiles/tileset_green.png" id="5_opsir"]
 [ext_resource type="PackedScene" uid="uid://b7rj44d2gu3qk" path="res://clock.tscn" id="6_wrasq"]
 [ext_resource type="PackedScene" uid="uid://ns673t3xmqdc" path="res://entities/rock/rock.tscn" id="7_pbey5"]
-[ext_resource type="Texture2D" uid="uid://bcdm204uwks8p" path="res://assets/tiles/tileset_blue.png" id="7_svwk8"]
-[ext_resource type="PackedScene" uid="uid://bxw7gxj4gpvc3" path="res://entities/coal_rock/coal_rock.tscn" id="8_wmo1i"]
-[ext_resource type="PackedScene" uid="uid://cx07ehh4wopf0" path="res://entities/battery_pickup/battery_pickup.tscn" id="9_tcb8q"]
+[ext_resource type="PackedScene" uid="uid://cwcc6jsip6as4" path="res://scene_transition_area.tscn" id="8_spjm6"]
+[ext_resource type="AudioStream" uid="uid://b506rj1ynhg1p" path="res://assets/music/day_theme.ogg" id="9_dr28v"]
+[ext_resource type="Script" path="res://overworld_lighting.gd" id="9_jax82"]
 [ext_resource type="PackedScene" uid="uid://xc3eumu5bgcd" path="res://entities/ship/ship.tscn" id="10_87cvs"]
-[ext_resource type="AudioStream" uid="uid://srkwqk8mte3y" path="res://assets/music/test_music.wav" id="11_iarpj"]
-[ext_resource type="PackedScene" uid="uid://c5t7jdvdqdicc" path="res://entities/bomb/bomb.tscn" id="12_1pxpk"]
+[ext_resource type="PackedScene" uid="uid://c2fxn3d0xt32m" path="res://ui/ship_ui.tscn" id="10_aka17"]
+[ext_resource type="AudioStream" uid="uid://i468mtth1usm" path="res://assets/sfx/wind.ogg" id="10_xu3bs"]
+[ext_resource type="Script" path="res://ui/ship_ui.gd" id="11_2l7jm"]
+[ext_resource type="PackedScene" uid="uid://bta3db0nlvdq4" path="res://entities/small_rock/small_rock.tscn" id="11_ruhgt"]
+[ext_resource type="Texture2D" uid="uid://rfrhohelf7ev" path="res://assets/bomb.png" id="13_pkmrh"]
+[ext_resource type="Script" path="res://ui/inventory.gd" id="13_trfka"]
+[ext_resource type="Texture2D" uid="uid://dn4xhkjgw2ddg" path="res://assets/drill_icon.png" id="16_b40f8"]
+[ext_resource type="Texture2D" uid="uid://c2uo3cr547k3d" path="res://assets/sword.png" id="17_1t1vx"]
+[ext_resource type="Texture2D" uid="uid://c83hagtehbkrc" path="res://assets/speed.png" id="20_om5mt"]
+[ext_resource type="Texture2D" uid="uid://3hwommce6ydi" path="res://assets/warp.png" id="21_hv20d"]
 
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_x287l"]
-vertices = PackedVector2Array(16, 16, -16, 16, -16, -16, 16, -16)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)])
-source_geometry_group_name = &"navigation_polygon_source_group"
-agent_radius = 0.0
+[sub_resource type="Gradient" id="Gradient_gs3ub"]
+offsets = PackedFloat32Array(0, 0.385542, 0.620482, 0.789157)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.292031, 0.171658, 0.350611, 1, 0, 0, 0, 1)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dcmd6"]
-polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1kmik"]
+gradient = SubResource("Gradient_gs3ub")
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ufo8h"]
-polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q3myi"]
-texture = ExtResource("7_svwk8")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ndw8e"]
+texture = ExtResource("5_opsir")
 texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
-0:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x287l")
 1:0/0 = 0
 1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 1:0/0/physics_layer_0/angular_velocity = 0.0
-1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x287l")
 2:0/0 = 0
 2:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:0/0/physics_layer_0/angular_velocity = 0.0
-2:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x287l")
 3:0/0 = 0
 3:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 3:0/0/physics_layer_0/angular_velocity = 0.0
-3:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x287l")
 4:0/0 = 0
 4:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 4:0/0/physics_layer_0/angular_velocity = 0.0
-4:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_x287l")
 5:0/0 = 0
-5:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_dcmd6")
 5:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 5:0/0/physics_layer_0/angular_velocity = 0.0
 5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 6:0/0 = 0
-6:0/0/occlusion_layer_0/polygon = SubResource("OccluderPolygon2D_ufo8h")
 6:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 6:0/0/physics_layer_0/angular_velocity = 0.0
 6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+7:0/0 = 0
+7:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+7:0/0/physics_layer_0/angular_velocity = 0.0
+8:0/0 = 0
+8:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+8:0/0/physics_layer_0/angular_velocity = 0.0
+9:0/0 = 0
+9:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+9:0/0/physics_layer_0/angular_velocity = 0.0
 
-[sub_resource type="TileSet" id="TileSet_ca22c"]
+[sub_resource type="TileSet" id="TileSet_7yrsl"]
 tile_size = Vector2i(32, 32)
-occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 1
-navigation_layer_0/layers = 1
-sources/2 = SubResource("TileSetAtlasSource_q3myi")
+sources/1 = SubResource("TileSetAtlasSource_ndw8e")
 
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yb8g7"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_34pia"]
+light_mode = 1
 
 [node name="Main" type="Node"]
 script = ExtResource("1_ldknm")
-
-[node name="TileMap" type="TileMap" parent="."]
-scale = Vector2(2, 2)
-tile_set = SubResource("TileSet_ca22c")
-format = 2
-layer_0/tile_data = PackedInt32Array(0, 327682, 0, 1, 327682, 0, 2, 393218, 0, 3, 327682, 0, 4, 327682, 0, 5, 327682, 0, 65541, 327682, 0, 65540, 327682, 0, 65539, 327682, 0, 65538, 393218, 0, 131074, 327682, 0, 196610, 327682, 0, 196609, 327682, 0, 131073, 327682, 0, 65537, 393218, 0, 65536, 327682, 0, 131072, 393218, 0, 196608, 327682, 0, 262144, 327682, 0, 327680, 327682, 0, 327681, 327682, 0, 393217, 327682, 0, 393218, 327682, 0, 458754, 393218, 0, 458753, 393218, 0, 393216, 327682, 0, 458752, 327682, 0, 524288, 327682, 0, 589824, 327682, 0, 655360, 327682, 0, 720896, 327682, 0, 720897, 327682, 0, 720898, 327682, 0, 720899, 327682, 0, 720900, 327682, 0, 720901, 327682, 0, 720902, 327682, 0, 720903, 327682, 0, 720904, 393218, 0, 720905, 393218, 0, 720906, 393218, 0, 720907, 393218, 0, 720908, 393218, 0, 720909, 327682, 0, 720910, 327682, 0, 720911, 327682, 0, 655375, 327682, 0, 589839, 327682, 0, 524303, 327682, 0, 458767, 327682, 0, 393231, 327682, 0, 327695, 327682, 0, 262159, 327682, 0, 196623, 327682, 0, 131087, 327682, 0, 65551, 327682, 0, 65550, 393218, 0, 14, 393218, 0, 15, 327682, 0, 13, 393218, 0, 12, 327682, 0, 11, 327682, 0, 10, 327682, 0, 9, 327682, 0, 8, 327682, 0, 7, 327682, 0, 6, 327682, 0, 65547, 327682, 0, 65548, 327682, 0, 65549, 393218, 0, 131085, 327682, 0, 131086, 327682, 0, 196622, 327682, 0, 524298, 327682, 0, 524297, 327682, 0, 458761, 393218, 0, 458760, 327682, 0, 393224, 327682, 0, 393225, 393218, 0, 393226, 393218, 0, 393227, 327682, 0, 458763, 327682, 0, 458762, 393218, 0, 327690, 327682, 0, 589828, 196610, 0, 524291, 393218, 0, 458755, 393218, 0, 458756, 393218, 0, 458757, 393218, 0, 524293, 393218, 0, 524292, 393218, 0, 655369, 393218, 0, 655368, 393218, 0, 655370, 393218, 0, 589829, 131074, 0, 327684, 131074, 0, 262148, 131074, 0, 262149, 131074, 0, 196618, 131074, 0, 524302, 131074, 0, 589836, 131074, 0, 655361, 65538, 0, 262146, 65538, 0, 196611, 65538, 0, 131079, 65538, 0, 131076, 196610, 0, 589831, 196610, 0, 458759, 196610, 0, 327688, 196610, 0, 393229, 196610, 0, 196620, 262146, 0, 196621, 262146, 0, 589834, 262146, 0, 393222, 262146, 0, 65544, 262146, 0, 524290, 262146, 0, 524289, 2, 0, 589825, 2, 0, 589826, 2, 0, 655362, 2, 0, 655363, 2, 0, 589827, 2, 0, 655364, 131074, 0, 655365, 196610, 0, 655366, 196610, 0, 655367, 2, 0, 589830, 262146, 0, 524294, 2, 0, 458758, 196610, 0, 524295, 262146, 0, 524296, 2, 0, 589832, 262146, 0, 589833, 2, 0, 524299, 262146, 0, 524300, 2, 0, 524301, 196610, 0, 589837, 2, 0, 655374, 196610, 0, 589838, 196610, 0, 655373, 2, 0, 655372, 196610, 0, 655371, 2, 0, 589835, 2, 0, 262145, 262146, 0, 131075, 2, 0, 262147, 262146, 0, 327683, 196610, 0, 327682, 262146, 0, 393219, 2, 0, 393220, 196610, 0, 393221, 262146, 0, 327685, 262146, 0, 327686, 2, 0, 327687, 262146, 0, 393223, 2, 0, 196612, 262146, 0, 196613, 196610, 0, 131077, 2, 0, 131078, 2, 0, 65542, 2, 0, 65543, 2, 0, 196614, 2, 0, 262150, 262146, 0, 262151, 196610, 0, 262152, 2, 0, 196616, 196610, 0, 196615, 2, 0, 196617, 262146, 0, 262153, 262146, 0, 327689, 2, 0, 131080, 262146, 0, 131081, 2, 0, 131082, 262146, 0, 65546, 2, 0, 65545, 2, 0, 131083, 196610, 0, 131084, 2, 0, 196619, 2, 0, 262155, 196610, 0, 262154, 196610, 0, 327691, 2, 0, 327692, 262146, 0, 262156, 2, 0, 262157, 2, 0, 262158, 2, 0, 327694, 2, 0, 327693, 2, 0, 393230, 2, 0, 458766, 2, 0, 458765, 262146, 0, 458764, 262146, 0, 393228, 2, 0)
 
 [node name="HUD" parent="." instance=ExtResource("1_0hk7k")]
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_4gvw1")]
 
+[node name="Clock" parent="." instance=ExtResource("6_wrasq")]
+
+[node name="Overworld" type="Node2D" parent="."]
+script = ExtResource("9_jax82")
+gradient = SubResource("GradientTexture1D_1kmik")
+
+[node name="TileMap" type="TileMap" parent="Overworld"]
+scale = Vector2(2, 2)
+tile_set = SubResource("TileSet_7yrsl")
+format = 2
+layer_0/tile_data = PackedInt32Array(0, 327681, 0, 1, 327681, 0, 2, 327681, 0, 3, 393217, 0, 4, 393217, 0, 5, 393217, 0, 6, 327681, 0, 7, 327681, 0, 8, 327681, 0, 9, 327681, 0, 10, 327681, 0, 11, 327681, 0, 12, 327681, 0, 13, 327681, 0, 14, 327681, 0, 65550, 327681, 0, 65549, 327681, 0, 65548, 327681, 0, 65547, 327681, 0, 65546, 327681, 0, 65545, 327681, 0, 65544, 327681, 0, 65543, 327681, 0, 65542, 393217, 0, 65541, 393217, 0, 65540, 393217, 0, 65539, 327681, 0, 65538, 327681, 0, 65537, 327681, 0, 65536, 393217, 0, 131077, 393217, 0, 131078, 393217, 0, 131079, 327681, 0, 720896, 327681, 0, 655360, 393217, 0, 589824, 393217, 0, 524288, 327681, 0, 458752, 327681, 0, 393216, 327681, 0, 327680, 327681, 0, 262144, 327681, 0, 196608, 393217, 0, 131072, 393217, 0, 131073, 327681, 0, 131074, 327681, 0, 131075, 327681, 0, 131076, 393217, 0, 196612, 393217, 0, 196613, 393217, 0, 196614, 393217, 0, 196615, 327681, 0, 196616, 327681, 0, 131080, 327681, 0, 589825, 393217, 0, 589826, 393217, 0, 655362, 393217, 0, 655361, 393217, 0, 720897, 327681, 0, 720898, 327681, 0, 720899, 327681, 0, 720900, 327681, 0, 524289, 393217, 0, 458753, 393217, 0, 196609, 393217, 0, 524292, 524289, 0, 458756, 458753, 0, 393220, 458753, 0, 393221, 458753, 0, 393222, 458753, 0, 393223, 458753, 0, 327688, 458753, 0, 327689, 458753, 0, 393225, 458753, 0, 458761, 458753, 0, 458760, 458753, 0, 524296, 458753, 0, 524295, 458753, 0, 589830, 458753, 0, 589831, 458753, 0, 655367, 262145, 0, 655368, 458753, 0, 589832, 458753, 0, 589833, 458753, 0, 524297, 458753, 0, 327687, 458753, 0, 327690, 458753, 0, 327691, 524289, 0, 393227, 458753, 0, 458764, 458753, 0, 458763, 458753, 0, 458762, 458753, 0, 524298, 458753, 0, 327692, 524289, 0, 262157, 458753, 0, 327693, 458753, 0, 327694, 458753, 0, 393230, 458753, 0, 458766, 458753, 0, 458765, 458753, 0, 524301, 458753, 0, 524300, 458753, 0, 524299, 458753, 0, 524294, 458753, 0, 524293, 458753, 0, 393219, 458753, 0, 327683, 458753, 0, 327682, 458753, 0, 327684, 458753, 0, 327685, 458753, 0, 458755, 458753, 0, 589828, 524289, 0, 458757, 524289, 0, 458758, 524289, 0, 393228, 524289, 0, 262155, 524289, 0, 262154, 524289, 0, 262156, 524289, 0, 196620, 524289, 0, 655374, 524289, 0, 655373, 524289, 0, 589837, 524289, 0, 589838, 524289, 0, 524302, 524289, 0, 524303, 524289, 0, 524304, 524289, 0, 458768, 458753, 0, 589840, 524289, 0, 589839, 262145, 0, 458767, 524289, 0, 458759, 262145, 0, 393224, 262145, 0, 327686, 262145, 0, 393226, 262145, 0, 393229, 262145, 0, 655370, 262145, 0, 589836, 262145, 0, 393218, 262145, 0, 262145, 131073, 0, 196611, 327681, 0, 327681, 131073, 0, 262148, 131073, 0, 262151, 131073, 0, 524290, 65537, 0, 655363, 65537, 0, 458754, 458753, 0, 393217, 458753, 0, 196610, 393217, 0, 262146, 458753, 0, 262147, 458753, 0, 262149, 458753, 0, 262150, 458753, 0, 524291, 458753, 0, 589827, 458753, 0, 655364, 458753, 0, 655365, 458753, 0, 589829, 458753, 0, 655366, 458753, 0, 720901, 327681, 0, 720902, 327681, 0, 720903, 327681, 0, 720904, 327681, 0, 720905, 327681, 0, 720906, 327681, 0, 720907, 327681, 0, 720908, 327681, 0, 720909, 327681, 0, 720910, 327681, 0, 720911, 327681, 0, 720912, 327681, 0, 720913, 327681, 0, 720914, 327681, 0, 720915, 327681, 0, 720916, 327681, 0, 720917, 327681, 0, 15, 327681, 0, 16, 327681, 0, 17, 327681, 0, 18, 327681, 0, 19, 327681, 0, 20, 327681, 0, 21, 327681, 0, 22, 327681, 0, 23, 327681, 0, 24, 327681, 0, 25, 327681, 0, 26, 327681, 0, 27, 327681, 0, 65563, 327681, 0, 131099, 327681, 0, 196635, 327681, 0, 262172, 327681, 0, 327708, 327681, 0, 393244, 327681, 0, 458780, 327681, 0, 524316, 327681, 0, 589852, 327681, 0, 655388, 327681, 0, 655387, 327681, 0, 720923, 327681, 0, 720924, 327681, 0, 720922, 327681, 0, 720921, 327681, 0, 720920, 327681, 0, 720919, 327681, 0, 720918, 327681, 0, 28, 327681, 0, 65564, 327681, 0, 131100, 327681, 0, 196636, 327681, 0, 131093, 589825, 0, 65551, 393217, 0, 65552, 393217, 0, 131088, 393217, 0, 131089, 393217, 0, 131090, 327681, 0, 196626, 327681, 0, 196627, 327681, 0, 131091, 327681, 0, 131092, 393217, 0, 65556, 393217, 0, 65555, 327681, 0, 65554, 327681, 0, 65553, 327681, 0, 655379, 393217, 0, 655380, 393217, 0, 589844, 393217, 0, 524308, 393217, 0, 458772, 393217, 0, 458771, 393217, 0, 393236, 393217, 0, 393237, 458753, 0, 458773, 393217, 0, 524309, 393217, 0, 589845, 393217, 0, 655381, 393217, 0, 655382, 393217, 0, 589846, 393217, 0, 655383, 393217, 0, 589847, 393217, 0, 196625, 458753, 0, 262161, 524289, 0, 327697, 458753, 0, 327698, 458753, 0, 327699, 458753, 0, 262163, 458753, 0, 262164, 458753, 0, 393240, 524289, 0, 327704, 458753, 0, 327705, 458753, 0, 262169, 262145, 0, 327706, 458753, 0, 327707, 458753, 0, 393243, 458753, 0, 393242, 458753, 0, 458778, 458753, 0, 458777, 458753, 0, 65557, 393217, 0, 65558, 393217, 0, 65559, 327681, 0, 131095, 327681, 0, 196631, 327681, 0, 262167, 393217, 0, 196630, 393217, 0, 131094, 393217, 0, 196632, 327681, 0, 65560, 327681, 0, 65561, 327681, 0, 65562, 327681, 0, 131098, 327681, 0, 131097, 327681, 0, 131096, 327681, 0, 196634, 327681, 0, 458775, 524289, 0, 393239, 524289, 0, 393241, 524289, 0, 327696, 524289, 0, 262160, 524289, 0, 262159, 524289, 0, 589843, 524289, 0, 524307, 524289, 0, 655384, 524289, 0, 589848, 524289, 0, 589849, 262145, 0, 655385, 524289, 0, 655386, 524289, 0, 458776, 458753, 0, 524312, 458753, 0, 524313, 458753, 0, 524314, 458753, 0, 589850, 458753, 0, 589851, 458753, 0, 524315, 458753, 0, 458779, 262145, 0, 524311, 262145, 0, 524310, 458753, 0, 458774, 458753, 0, 327701, 458753, 0, 327702, 458753, 0, 393238, 458753, 0, 327700, 262145, 0, 196628, 458753, 0, 196629, 458753, 0, 262165, 458753, 0, 262166, 262145, 0, 327703, 458753, 0, 262168, 458753, 0, 196633, 458753, 0, 262170, 458753, 0, 262171, 458753, 0, 655378, 262145, 0, 131086, 262145, 0, 196618, 262145, 0, 131081, 393217, 0, 131082, 393217, 0, 131083, 393217, 0, 655375, 458753, 0, 655376, 458753, 0, 655377, 458753, 0, 589841, 458753, 0, 589842, 458753, 0, 524306, 458753, 0, 655371, 458753, 0, 655372, 458753, 0, 262152, 458753, 0, 262153, 458753, 0, 196617, 458753, 0, 131085, 458753, 0, 196621, 458753, 0, 196622, 458753, 0, 196623, 458753, 0, 393232, 458753, 0, 393233, 458753, 0, 458770, 458753, 0, 393235, 131073, 0, 262162, 131073, 0, 131087, 131073, 0, 196619, 131073, 0, 655369, 131073, 0, 589835, 65537, 0, 262158, 65537, 0, 393234, 65537, 0, 131084, 65537, 0, 196624, 65537, 0, 327695, 458753, 0, 393231, 458753, 0, 589834, 458753, 0, 458769, 458753, 0, 524305, 458753, 0)
+
+[node name="Rock" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1314, 350)
+
+[node name="Rock2" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1250, 348)
+
+[node name="Rock3" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1316, 223)
+
+[node name="Rock4" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1251, 283)
+
+[node name="Rock5" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1016, 463)
+
+[node name="Rock6" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1448, 547)
+
+[node name="Rock7" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1510, 421)
+
+[node name="Rock8" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1505, 356)
+
+[node name="Rock9" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1437, 418)
+
+[node name="Rock10" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1755, 606)
+
+[node name="Rock11" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1705, 288)
+
+[node name="Rock12" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1627, 544)
+
+[node name="Rock13" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1756, 414)
+
+[node name="Rock14" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(677, 676)
+
+[node name="Rock15" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(925, 220)
+
+[node name="Rock16" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(1375, 284)
+
+[node name="Rock17" parent="Overworld" instance=ExtResource("7_pbey5")]
+position = Vector2(581, 443)
+
+[node name="SpawnFromCave" type="Marker2D" parent="Overworld"]
+position = Vector2(1376, 225)
+
+[node name="WarpPoint" type="Marker2D" parent="Overworld"]
+position = Vector2(416, 340)
+
+[node name="ToCave" parent="Overworld" instance=ExtResource("8_spjm6")]
+position = Vector2(1376, 202)
+
+[node name="CollisionShape2D" parent="Overworld/ToCave" index="0"]
+position = Vector2(-3, -36)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Overworld"]
+
+[node name="DayBGM" type="AudioStreamPlayer2D" parent="Overworld"]
+stream = ExtResource("9_dr28v")
+autoplay = true
+max_distance = 20000.0
+attenuation = 0.00164237
+
+[node name="WindSFX" type="AudioStreamPlayer2D" parent="Overworld"]
+stream = ExtResource("10_xu3bs")
+volume_db = 3.0
+
+[node name="SmallRock" parent="Overworld" instance=ExtResource("11_ruhgt")]
+position = Vector2(1444, 486)
+
 [node name="Player" parent="." instance=ExtResource("4_4qah8")]
 z_index = 1
-position = Vector2(234, 642)
+position = Vector2(241, 331)
 
 [node name="Flashlight" parent="Player/PlayerSprite" index="1"]
 toggled = false
@@ -92,59 +180,239 @@ toggled = false
 [node name="CollisionShape2D" parent="Player" index="1"]
 position = Vector2(0, 11)
 
-[node name="Clock" parent="." instance=ExtResource("6_wrasq")]
-
-[node name="Rock" parent="." instance=ExtResource("7_pbey5")]
-position = Vector2(400, 183)
-
-[node name="Rock2" parent="." instance=ExtResource("7_pbey5")]
-position = Vector2(398, 233)
-
-[node name="Rock3" parent="." instance=ExtResource("7_pbey5")]
-position = Vector2(99, 291)
-
-[node name="Rock4" parent="." instance=ExtResource("7_pbey5")]
-position = Vector2(506, 262)
-
-[node name="CoalRock" parent="." instance=ExtResource("8_wmo1i")]
-position = Vector2(328, 362)
-
-[node name="CoalRock2" parent="." instance=ExtResource("8_wmo1i")]
-position = Vector2(483, 681)
-
-[node name="Rock5" parent="." instance=ExtResource("7_pbey5")]
-position = Vector2(452, 581)
-
-[node name="CoalRock3" parent="." instance=ExtResource("8_wmo1i")]
-position = Vector2(542, 538)
-
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-visible = false
-material = SubResource("CanvasItemMaterial_yb8g7")
-color = Color(0.00392157, 0.00784314, 0.0196078, 1)
-
-[node name="BatteryPickup" parent="." instance=ExtResource("9_tcb8q")]
-position = Vector2(315, 283)
-
 [node name="Ship" parent="." instance=ExtResource("10_87cvs")]
-position = Vector2(108, 620)
+position = Vector2(208, 318)
 
-[node name="BGM" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("11_iarpj")
+[node name="ShipUI" parent="." instance=ExtResource("10_aka17")]
+material = SubResource("CanvasItemMaterial_34pia")
+offset_left = 134.0
+offset_top = 235.0
+offset_right = 134.0
+offset_bottom = 235.0
+script = ExtResource("11_2l7jm")
 
-[node name="Bomb" parent="." instance=ExtResource("12_1pxpk")]
-position = Vector2(413, 318)
+[node name="LeaveButton" parent="ShipUI" index="0"]
+use_parent_material = true
+layout_mode = 0
+offset_left = -10.0
+offset_top = 3.0
+offset_right = 70.0
+offset_bottom = 34.0
+
+[node name="ChargeItemsButton" parent="ShipUI" index="1"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 118.0
+offset_top = 3.0
+offset_right = 228.0
+offset_bottom = 34.0
+
+[node name="Label" parent="ShipUI" index="2"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 108.0
+offset_top = -24.0
+offset_right = 244.0
+offset_bottom = -1.0
+
+[node name="ShipArrow" parent="ShipUI" index="3"]
+position = Vector2(204, 101)
+
+[node name="InventoryUI" type="CanvasLayer" parent="."]
+script = ExtResource("13_trfka")
+
+[node name="Background" type="ColorRect" parent="InventoryUI"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -180.0
+offset_top = -80.0
+offset_right = 100.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.431373, 0.431373, 0.431373, 0.686275)
+
+[node name="Current" type="ColorRect" parent="InventoryUI/Background"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 50.0
+offset_right = 40.0
+offset_bottom = 55.0
+color = Color(1, 1, 0, 1)
+
+[node name="1" type="TextureRect" parent="InventoryUI/Background"]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 30.0
+offset_bottom = 30.0
+scale = Vector2(2, 2)
+texture = ExtResource("16_b40f8")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="InventoryUI/Background/1"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 16
+text = "1"
+
+[node name="StackLabel" type="Label" parent="InventoryUI/Background/1"]
+visible = false
+layout_mode = 0
+offset_top = 15.0
+offset_right = 46.0
+offset_bottom = 38.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 2
+
+[node name="2" type="TextureRect" parent="InventoryUI/Background"]
+layout_mode = 0
+offset_left = 60.0
+offset_top = 5.0
+offset_right = 85.0
+offset_bottom = 30.0
+scale = Vector2(2, 2)
+texture = ExtResource("17_1t1vx")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="InventoryUI/Background/2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 16
+text = "2"
+
+[node name="StackLabel" type="Label" parent="InventoryUI/Background/2"]
+visible = false
+layout_mode = 0
+offset_top = 15.0
+offset_right = 46.0
+offset_bottom = 38.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 2
+
+[node name="3" type="TextureRect" parent="InventoryUI/Background"]
+layout_mode = 0
+offset_left = 115.0
+offset_top = 5.0
+offset_right = 140.0
+offset_bottom = 30.0
+scale = Vector2(2, 2)
+texture = ExtResource("13_pkmrh")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="InventoryUI/Background/3"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 16
+text = "3"
+
+[node name="StackLabel" type="Label" parent="InventoryUI/Background/3"]
+visible = false
+layout_mode = 0
+offset_top = 15.0
+offset_right = 46.0
+offset_bottom = 38.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 2
+
+[node name="4" type="TextureRect" parent="InventoryUI/Background"]
+layout_mode = 0
+offset_left = 170.0
+offset_top = 5.0
+offset_right = 195.0
+offset_bottom = 30.0
+scale = Vector2(2, 2)
+texture = ExtResource("20_om5mt")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="InventoryUI/Background/4"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 16
+text = "4"
+
+[node name="StackLabel" type="Label" parent="InventoryUI/Background/4"]
+visible = false
+layout_mode = 0
+offset_top = 15.0
+offset_right = 46.0
+offset_bottom = 38.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 2
+
+[node name="5" type="TextureRect" parent="InventoryUI/Background"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 5.0
+offset_right = 250.0
+offset_bottom = 30.0
+scale = Vector2(2, 2)
+texture = ExtResource("21_hv20d")
+stretch_mode = 3
+
+[node name="Label" type="Label" parent="InventoryUI/Background/5"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 16
+text = "5"
+
+[node name="StackLabel" type="Label" parent="InventoryUI/Background/5"]
+visible = false
+layout_mode = 0
+offset_top = 15.0
+offset_right = 46.0
+offset_bottom = 38.0
+scale = Vector2(0.5, 0.5)
+theme_override_font_sizes/font_size = 16
+text = "0"
+horizontal_alignment = 2
 
 [connection signal="pressed_exit_button" from="PauseMenu" to="." method="_on_pause_menu_pressed_exit_button"]
 [connection signal="pressed_resume_button" from="PauseMenu" to="." method="_on_pause_menu_pressed_resume_button"]
 [connection signal="visibility_changed" from="PauseMenu" to="." method="_on_pause_menu_visibility_changed"]
-[connection signal="health_changed" from="Player" to="." method="_on_player_health_changed"]
-[connection signal="power_changed" from="Player" to="HUD" method="_on_player_power_changed"]
-[connection signal="stopped_charging" from="Player" to="Ship" method="_on_player_stopped_charging"]
+[connection signal="clock_updated" from="Clock" to="." method="_on_clock_updated"]
+[connection signal="clock_updated" from="Clock" to="Overworld" method="_on_clock_updated"]
+[connection signal="player_entered" from="Overworld/ToCave" to="." method="_on_scene_transition_area_player_entered"]
+[connection signal="finished" from="Overworld/WindSFX" to="Overworld" method="_on_wind_sfx_finished"]
+[connection signal="is_speedy" from="Player" to="HUD" method="_on_player_is_speedy"]
+[connection signal="light_toggled" from="Player" to="HUD" method="_on_player_light_toggled"]
+[connection signal="power_changed" from="Player" to="." method="_on_player_power_changed"]
+[connection signal="stopped_charging" from="Player" to="ShipUI" method="_on_player_stopped_charging"]
+[connection signal="used_item" from="Player" to="InventoryUI" method="_on_player_used_item"]
+[connection signal="player_warped" from="Player/PlayerSprite/WarpItem" to="." method="_on_player_warped"]
 [connection signal="entity_died" from="Player/HealthComponent" to="." method="_on_player_died"]
 [connection signal="health_changed" from="Player/HealthComponent" to="Player" method="_on_health_component_health_changed"]
-[connection signal="clock_updated" from="Clock" to="." method="_on_clock_updated"]
 [connection signal="charging_items" from="Ship" to="Player" method="_on_ship_charging_items"]
+[connection signal="charging_items" from="Ship" to="ShipUI" method="_on_ship_charging_items"]
 [connection signal="left_moon" from="Ship" to="." method="_on_ship_left_moon"]
+[connection signal="player_in_ship" from="Ship" to="ShipUI" method="_on_ship_player_in_ship"]
+[connection signal="pressed" from="ShipUI/LeaveButton" to="Ship" method="_on_leave_button_pressed"]
+[connection signal="pressed" from="ShipUI/ChargeItemsButton" to="Ship" method="_on_charge_items_button_pressed"]
+[connection signal="pressed" from="ShipUI/ChargeItemsButton" to="ShipUI" method="_on_charge_items_button_pressed"]
+[connection signal="player_changed_item" from="InventoryUI" to="Player" method="_on_player_changed_item"]
 
+[editable path="Clock"]
+[editable path="Overworld/ToCave"]
 [editable path="Player"]
+[editable path="ShipUI"]

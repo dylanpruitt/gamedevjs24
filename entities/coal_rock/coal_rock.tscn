@@ -14,6 +14,7 @@ size = Vector2(12.75, 10)
 
 [node name="CoalRock" type="RigidBody2D"]
 gravity_scale = 0.0
+freeze = true
 script = ExtResource("1_76s8x")
 metadata/_edit_group_ = true
 
@@ -29,6 +30,7 @@ texture = ExtResource("2_k7t8a")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_oimng")]
 health = 240
+immune_to = Array[int]([1])
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false

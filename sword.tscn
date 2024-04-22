@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://dr3jninldw3p3"]
+
+[ext_resource type="Script" path="res://sword.gd" id="1_igk16"]
+[ext_resource type="Texture2D" uid="uid://c2uo3cr547k3d" path="res://assets/sword.png" id="1_j531l"]
+[ext_resource type="PackedScene" uid="uid://cbjaw7uwcmwh2" path="res://components/power_drain_component.tscn" id="3_5cmjv"]
+[ext_resource type="AudioStream" uid="uid://h7v25ghlsmnb" path="res://assets/sfx/sword_swing.ogg" id="4_7r62j"]
+[ext_resource type="Texture2D" uid="uid://bhn40lsxnxm6x" path="res://assets/neutral_light_texture_96.webp" id="5_nyi7n"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o6u5m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_j531l")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7oxsm"]
+size = Vector2(11, 4)
+
+[node name="Sword" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_o6u5m")
+frame_progress = 0.629285
+offset = Vector2(6, 0)
+script = ExtResource("1_igk16")
+sword_cooldown_seconds = 0.5
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1.5, 0)
+shape = SubResource("RectangleShape2D_7oxsm")
+
+[node name="PowerDrainComponent" parent="." instance=ExtResource("3_5cmjv")]
+power_drain = 5
+
+[node name="SwingSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_7r62j")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(12, 0)
+color = Color(1, 0.0235294, 0.0235294, 1)
+energy = 0.8
+texture = ExtResource("5_nyi7n")

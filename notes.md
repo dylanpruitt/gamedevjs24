@@ -39,8 +39,71 @@ started connecting UI screens
 can no longer use tools if player power <= 0
 finally added footsteps
 added explosions/bombs (but explosions need some tuning, range doesn't match sprite)
+added charging SFX
 
 (11-12 hours so far)
+
+##### 04/18
+
+painful but necessary process of moving player/ship/ship ui out of the cave scene and reconnecting everything
+working on scene transitions/saving memory between cave and overworld
+
+(4-5 hours so far)
+
+##### 04/19
+
+fixed a bug where ship/ramp/ui wouldn't display when loading overworld again
+finally fixed issues with ship ui and canvasmodulate
+made simple day/night light cycle for overworld
+added ambient cave noises
+added overtime pay
+added short intro "cutscene"
+updated brian sprite / quotes in shop
+added wind sfx at night; overworld day theme sketch
+
+(7-8 hours so far)
+
+##### 04/20
+
+started reorganizing code for inventory
+added basic sword
+got basic inventory UI working
+
+
+inventory has been more difficult than expected / burnt out
+
+(4-5 hours so far)
+
+##### 04/21
+
+continued work on inventory hotbar
+fixed bomb rendering bug
+battery pickups don't do anything if player charge is full
+corrected explosion range + lighting scale
+finished basic inventory ui
+added small rock, big rock, iron
+added flashlight icon
+added tutorial screen
+fixed bug where cave wouldn't reset after day change
+added warp
+added speed
+game over screen: "play again" resets globals / goes back to tutorial
+fleshed out item tab in shop screen
+shop adds to items now
+
+(6-7 hours so far)
+
+TODO cave gen
+
+TODO today: start making world?
+TODO: test enemy?
+TODO: medkit pickup
+TODO: add dead player sprite
+TODO: queue free mobs/explosions/etc on death
+TODO: add few seconds wait before missing? / killed screen transition
+TODO: finish out credits page
+TODO: work on day theme
+TODO: warp particles/sfx
 
 TODO pause menu [x]
 player movement?
@@ -51,8 +114,6 @@ shop screen
 globals
 lighting
 tilemaps
-overtime pay
-todo get charging sfx
 
 
 10/s - drill

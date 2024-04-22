@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bh1jbcbl117l3"]
+
+[ext_resource type="Texture2D" uid="uid://c83hagtehbkrc" path="res://assets/speed.png" id="1_y5pwu"]
+[ext_resource type="Script" path="res://entities/speed_item/speed_item.gd" id="2_20ujl"]
+[ext_resource type="Script" path="res://components/amount_component.gd" id="2_y7yu4"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xx5v7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_y5pwu")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="SpeedItem" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_xx5v7")
+script = ExtResource("2_20ujl")
+
+[node name="AmountComponent" type="Node" parent="."]
+script = ExtResource("2_y7yu4")
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true

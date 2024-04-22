@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c6c1qt6n6vcex"]
+[gd_scene load_steps=25 format=3 uid="uid://c6c1qt6n6vcex"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_bvfsr"]
 [ext_resource type="Texture2D" uid="uid://c8xfj67d3jn72" path="res://assets/player_down.png" id="1_qhk4b"]
@@ -7,8 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://monkduuu5cba" path="res://drill.tscn" id="5_sorlu"]
 [ext_resource type="PackedScene" uid="uid://wniglcht6m3o" path="res://components/health_component.tscn" id="6_7mwk8"]
 [ext_resource type="PackedScene" uid="uid://c0rl6ym1o7ku1" path="res://flashlight.tscn" id="6_lkgct"]
+[ext_resource type="PackedScene" uid="uid://dr3jninldw3p3" path="res://sword.tscn" id="7_vw6j3"]
 [ext_resource type="Texture2D" uid="uid://bhn40lsxnxm6x" path="res://assets/neutral_light_texture_96.webp" id="8_4egi1"]
+[ext_resource type="PackedScene" uid="uid://65gx614nc0v3" path="res://entities/bomb_item/bomb_item.tscn" id="8_bbbaf"]
 [ext_resource type="AudioStream" uid="uid://fbnjyplsonnp" path="res://assets/sfx/footsteps.ogg" id="9_5wqtx"]
+[ext_resource type="PackedScene" uid="uid://bh1jbcbl117l3" path="res://entities/speed_item/speed_item.tscn" id="9_ddntb"]
+[ext_resource type="PackedScene" uid="uid://bf5pgq2mu3vjd" path="res://entities/warp_item/warp_item.tscn" id="10_n7q74"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0hqvu"]
 atlas = ExtResource("1_qhk4b")
@@ -112,6 +116,18 @@ position = Vector2(0, 4)
 position = Vector2(0, 4)
 toggled = true
 
+[node name="Sword" parent="PlayerSprite" instance=ExtResource("7_vw6j3")]
+position = Vector2(-0.75, 3.25)
+
+[node name="BombItem" parent="PlayerSprite" instance=ExtResource("8_bbbaf")]
+scale = Vector2(0.5, 0.5)
+
+[node name="SpeedItem" parent="PlayerSprite" instance=ExtResource("9_ddntb")]
+scale = Vector2(0.5, 0.5)
+
+[node name="WarpItem" parent="PlayerSprite" instance=ExtResource("10_n7q74")]
+scale = Vector2(0.5, 0.5)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_3awcs")
 
@@ -128,6 +144,9 @@ texture = ExtResource("8_4egi1")
 stream = ExtResource("9_5wqtx")
 volume_db = -1.0
 
+[node name="Modifiers" type="Node" parent="."]
+
 [connection signal="drain_power" from="PlayerSprite/Drill" to="." method="_on_drill_drained_power"]
 [connection signal="drain_power" from="PlayerSprite/Flashlight" to="." method="_on_flashlight_drained_power"]
+[connection signal="drain_power" from="PlayerSprite/Sword" to="." method="_on_sword_drain_power"]
 [connection signal="health_changed" from="HealthComponent" to="." method="_on_health_changed"]

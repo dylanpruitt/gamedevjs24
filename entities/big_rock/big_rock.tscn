@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2xoik182wu6y"]
+
+[ext_resource type="Script" path="res://entities/rock/rock.gd" id="1_ojaoa"]
+[ext_resource type="Texture2D" uid="uid://bt4sbkr6j7fu5" path="res://assets/big_rock.png" id="2_5q3m3"]
+[ext_resource type="PackedScene" uid="uid://wniglcht6m3o" path="res://components/health_component.tscn" id="2_fgxbv"]
+[ext_resource type="Texture2D" uid="uid://ds6ilfn73ep5q" path="res://assets/tiles/rock_particle.png" id="3_34qx6"]
+[ext_resource type="PackedScene" uid="uid://v2pevsxqgv1e" path="res://components/value_component.tscn" id="4_tfvrq"]
+[ext_resource type="PackedScene" uid="uid://bjnll04vmh00" path="res://components/name_component.tscn" id="5_p7krl"]
+[ext_resource type="AudioStream" uid="uid://dai4sdbvm42dg" path="res://assets/sfx/rock_breaking.wav" id="7_6ooxk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e88lj"]
+size = Vector2(20.5, 14.5)
+
+[node name="BigRock" type="RigidBody2D"]
+gravity_scale = 0.0
+freeze = true
+script = ExtResource("1_ojaoa")
+broken_rock_texture_path = "res://assets/big_rock_broken.png"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 7)
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_e88lj")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_5q3m3")
+
+[node name="HealthComponent" parent="." instance=ExtResource("2_fgxbv")]
+health = 300
+immune_to = Array[int]([1])
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 0.38
+randomness = 0.39
+texture = ExtResource("3_34qx6")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 90.91
+
+[node name="ValueComponent" parent="." instance=ExtResource("4_tfvrq")]
+money_value = 4
+
+[node name="NameComponent" parent="." instance=ExtResource("5_p7krl")]
+entity_name = "BigRock"
+
+[node name="BreakSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_6ooxk")
+volume_db = 3.0
+
+[connection signal="entity_died" from="HealthComponent" to="." method="_on_entity_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_changed"]

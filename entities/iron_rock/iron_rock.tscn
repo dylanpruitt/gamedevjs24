@@ -1,0 +1,59 @@
+[gd_scene load_steps=10 format=3 uid="uid://descyecs7l1se"]
+
+[ext_resource type="Script" path="res://entities/rock/rock.gd" id="1_737ui"]
+[ext_resource type="Texture2D" uid="uid://su06il0gal7g" path="res://assets/iron_rock.png" id="2_mpc4q"]
+[ext_resource type="PackedScene" uid="uid://wniglcht6m3o" path="res://components/health_component.tscn" id="3_n8yxs"]
+[ext_resource type="Texture2D" uid="uid://ds6ilfn73ep5q" path="res://assets/tiles/rock_particle.png" id="4_6knnq"]
+[ext_resource type="PackedScene" uid="uid://v2pevsxqgv1e" path="res://components/value_component.tscn" id="5_jwowh"]
+[ext_resource type="PackedScene" uid="uid://bjnll04vmh00" path="res://components/name_component.tscn" id="6_pf7do"]
+[ext_resource type="AudioStream" uid="uid://dai4sdbvm42dg" path="res://assets/sfx/rock_breaking.wav" id="7_uq1qp"]
+[ext_resource type="Texture2D" uid="uid://bhn40lsxnxm6x" path="res://assets/neutral_light_texture_96.webp" id="8_afcph"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ou23"]
+size = Vector2(10.5, 9.5)
+
+[node name="IronRock" type="RigidBody2D"]
+gravity_scale = 0.0
+freeze = true
+script = ExtResource("1_737ui")
+broken_rock_texture_path = "res://assets/broken_iron_rock.png"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_2ou23")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(4, 4)
+texture = ExtResource("2_mpc4q")
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_n8yxs")]
+health = 360
+immune_to = Array[int]([1])
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 0.38
+randomness = 0.39
+texture = ExtResource("4_6knnq")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 90.91
+
+[node name="ValueComponent" parent="." instance=ExtResource("5_jwowh")]
+money_value = 20
+
+[node name="NameComponent" parent="." instance=ExtResource("6_pf7do")]
+entity_name = "Iron"
+
+[node name="BreakSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_uq1qp")
+volume_db = 3.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.5
+texture = ExtResource("8_afcph")
+
+[connection signal="entity_died" from="HealthComponent" to="." method="_on_entity_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_changed"]

@@ -1,5 +1,21 @@
 extends CanvasLayer
 
+var quotes_idle = [
+	"I like money.",
+	"You get double money working overtime.",
+]
+
+var quotes_on_buy = [
+	"Thankya thankya!",
+	"I can pay 5 minutes of rent now.",
+	"Ka-ching!"
+]
+
+var quotes_too_broke = [
+	"This ain't a charity!",
+	"Come back when you actually have the money.",
+	"People like you are the reason I hate this job."
+]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -8,11 +24,22 @@ func _ready():
 func _on_item_bought():
 	print("buying")
 	$BuySFX.play()
+	$BrianText.text = quotes_on_buy.pick_random()
 	update_money_label()
 
 func _on_too_broke():
-	print("!")
-	pass # Replace with function body.
+	$BrianText.text = quotes_too_broke.pick_random()
+	$TooBrokeSFX.play()
 
 func update_money_label():
 	$MoneyLabel.text = "$%s" % GlobalVariables.player_money
+
+
+func _on_continue_button_pressed():
+	GlobalVariables.player_found_items.clear()
+	get_tree().change_scene_to_file("res://main.tscn")
+
+
+func _on_brian_input_event(viewport, event, shape_idx):
+	if event is InputEventMouseButton and event.pressed:
+		$BrianText.text = quotes_idle.pick_random()

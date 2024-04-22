@@ -16,7 +16,6 @@ script = ExtResource("1_43yu4")
 metadata/_edit_group_ = true
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_d6tp3")]
-weak_type = "sword"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2, 2)
@@ -26,6 +25,7 @@ texture = ExtResource("2_s31ic")
 position = Vector2(0, 4)
 scale = Vector2(2, 2)
 shape = SubResource("CircleShape2D_ugt56")
+disabled = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(4, -20)

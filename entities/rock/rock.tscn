@@ -13,6 +13,7 @@ size = Vector2(12.75, 10)
 
 [node name="Rock" type="RigidBody2D"]
 gravity_scale = 0.0
+freeze = true
 script = ExtResource("1_k1uwu")
 metadata/_edit_group_ = true
 
@@ -27,6 +28,7 @@ texture = ExtResource("2_gfpic")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_sqinb")]
 health = 120
+immune_to = Array[int]([1])
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 emitting = false

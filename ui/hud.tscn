@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://daa0metoxw5bj"]
+[gd_scene load_steps=6 format=3 uid="uid://daa0metoxw5bj"]
 
 [ext_resource type="Script" path="res://ui/hud.gd" id="1_0erh6"]
+[ext_resource type="Texture2D" uid="uid://fwq5r2g6bdh8" path="res://assets/flashlight_icon.png" id="2_bkgi7"]
+[ext_resource type="Texture2D" uid="uid://bmrhpe23lwxma" path="res://assets/speed_icon.png" id="3_v4x52"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10oen"]
 bg_color = Color(0.894118, 0, 0, 1)
@@ -71,3 +73,48 @@ offset_bottom = 41.0
 grow_horizontal = 0
 theme_override_font_sizes/font_size = 24
 text = "12:00 PM"
+
+[node name="OvertimeLabel" type="Label" parent="."]
+visible = false
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -96.0
+offset_top = 48.0
+offset_right = -16.0
+offset_bottom = 71.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 16
+text = "OVERTIME"
+horizontal_alignment = 2
+
+[node name="QuotaLabel" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -42.5
+offset_top = 16.0
+offset_right = 42.5
+offset_bottom = 39.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 24
+text = "Quota: $15"
+
+[node name="FlashlightIcon" type="TextureRect" parent="."]
+visible = false
+offset_left = 16.0
+offset_top = 75.0
+offset_right = 61.0
+offset_bottom = 95.0
+texture = ExtResource("2_bkgi7")
+stretch_mode = 4
+
+[node name="SpeedIcon" type="TextureRect" parent="."]
+visible = false
+offset_left = 80.0
+offset_top = 75.0
+offset_right = 125.0
+offset_bottom = 95.0
+texture = ExtResource("3_v4x52")
+stretch_mode = 4

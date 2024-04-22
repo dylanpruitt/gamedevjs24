@@ -107,5 +107,6 @@ autoplay = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 texture = ExtResource("4_xmh7h")
+texture_scale = 4.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

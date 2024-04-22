@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://nywunn4pn0ha" path="res://assets/ship.png" id="2_m63xm"]
 [ext_resource type="Texture2D" uid="uid://dsgyrgoiwx867" path="res://assets/ship_exterior.png" id="3_81255"]
 [ext_resource type="Texture2D" uid="uid://cw62jp7dg44kb" path="res://assets/ship_ramp.png" id="3_v77o6"]
-[ext_resource type="Texture2D" uid="uid://ci2jv2wh3snrg" path="res://assets/arrow_left.png" id="4_yon06"]
-[ext_resource type="Texture2D" uid="uid://bllgin1pjo8dt" path="res://assets/lighting_test.png" id="6_c85om"]
 [ext_resource type="AudioStream" uid="uid://cobbc0ksyqsv4" path="res://assets/sfx/charger.ogg" id="6_eevyc"]
+[ext_resource type="Texture2D" uid="uid://bhn40lsxnxm6x" path="res://assets/neutral_light_texture_96.webp" id="6_myfut"]
+[ext_resource type="AudioStream" uid="uid://borcu5qqbnyhc" path="res://assets/sfx/flashlight_toggle.wav" id="7_tagxi"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_jf1nx"]
 a = Vector2(-4.125, -1.5)
@@ -26,7 +26,7 @@ size = Vector2(32.5, 21.5)
 
 [node name="Ship" type="RigidBody2D"]
 gravity_scale = 0.0
-lock_rotation = true
+freeze = true
 script = ExtResource("1_is2hi")
 metadata/_edit_group_ = true
 
@@ -35,13 +35,12 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_m63xm")
 
 [node name="ShipExteriorSprite" type="Sprite2D" parent="."]
-z_index = 1
+z_index = 2
 position = Vector2(18, 18)
 scale = Vector2(4, 4)
 texture = ExtResource("3_81255")
 
 [node name="Ramp" type="RigidBody2D" parent="."]
-z_index = -1
 position = Vector2(110, 67)
 gravity_scale = 0.0
 lock_rotation = true
@@ -71,11 +70,6 @@ position = Vector2(17, -31)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_vv2uq")
 
-[node name="ShipArrow" type="Sprite2D" parent="."]
-position = Vector2(167, 13)
-scale = Vector2(4, 4)
-texture = ExtResource("4_yon06")
-
 [node name="InnerArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InnerArea"]
@@ -83,50 +77,17 @@ position = Vector2(17, 15)
 scale = Vector2(4, 4)
 shape = SubResource("RectangleShape2D_iu2u5")
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-
-[node name="LeaveButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = -94.0
-offset_top = -99.0
-offset_right = -14.0
-offset_bottom = -68.0
-focus_neighbor_right = NodePath("../ChargeItemsButton")
-focus_next = NodePath("../ChargeItemsButton")
-focus_previous = NodePath("../ChargeItemsButton")
-text = "Leave"
-
-[node name="DirectionalLight2D" type="PointLight2D" parent="Control/LeaveButton"]
-position = Vector2(121, 14)
-texture = ExtResource("6_c85om")
-texture_scale = 4.0
-
-[node name="ChargeItemsButton" type="Button" parent="Control"]
-layout_mode = 0
-offset_left = 47.0
-offset_top = -99.0
-offset_right = 157.0
-offset_bottom = -68.0
-focus_neighbor_left = NodePath("../LeaveButton")
-focus_next = NodePath("../LeaveButton")
-focus_previous = NodePath("../LeaveButton")
-text = "Charge items"
-
-[node name="Label" type="Label" parent="Control"]
+[node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false
-layout_mode = 0
-offset_left = 36.0
-offset_top = -126.0
-offset_right = 172.0
-offset_bottom = -103.0
-text = "Charging power..."
+position = Vector2(93, 16)
+texture = ExtResource("6_myfut")
 
 [node name="ChargeStartSFX" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_eevyc")
 
+[node name="ToggleSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_tagxi")
+volume_db = -8.0
+
 [connection signal="body_entered" from="InnerArea" to="." method="_on_inner_area_body_entered"]
 [connection signal="body_exited" from="InnerArea" to="." method="_on_inner_area_body_exited"]
-[connection signal="pressed" from="Control/LeaveButton" to="." method="_on_leave_button_pressed"]
-[connection signal="pressed" from="Control/ChargeItemsButton" to="." method="_on_charge_items_button_pressed"]

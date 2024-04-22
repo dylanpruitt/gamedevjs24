@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://65gx614nc0v3"]
+
+[ext_resource type="Script" path="res://components/amount_component.gd" id="1_3e2i3"]
+[ext_resource type="Texture2D" uid="uid://rfrhohelf7ev" path="res://assets/bomb.png" id="1_bllx5"]
+[ext_resource type="Script" path="res://entities/bomb_item/bomb_item.gd" id="1_rrmly"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0lmgr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_bllx5")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BombItem" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_0lmgr")
+script = ExtResource("1_rrmly")
+
+[node name="AmountComponent" type="Node" parent="."]
+script = ExtResource("1_3e2i3")
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true

@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbjaw7uwcmwh2"]
+
+[ext_resource type="Script" path="res://components/power_drain.gd" id="1_ew7u0"]
+
+[node name="PowerDrainComponent" type="Node"]
+script = ExtResource("1_ew7u0")
+power_drain = 10

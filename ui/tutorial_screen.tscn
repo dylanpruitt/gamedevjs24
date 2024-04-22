@@ -1,0 +1,221 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsdqp0mj4ulai"]
+
+[ext_resource type="Script" path="res://ui/tutorial_screen.gd" id="1_5njrm"]
+[ext_resource type="Texture2D" uid="uid://dn4xhkjgw2ddg" path="res://assets/drill_icon.png" id="1_fhpun"]
+[ext_resource type="Texture2D" uid="uid://c2uo3cr547k3d" path="res://assets/sword.png" id="2_sh6cj"]
+[ext_resource type="Texture2D" uid="uid://ctv6t6bwik104" path="res://assets/flashlight.png" id="3_e5qe3"]
+
+[node name="TutorialScreen" type="CanvasLayer"]
+script = ExtResource("1_5njrm")
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -126.5
+offset_top = 16.0
+offset_right = 126.5
+offset_bottom = 104.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 64
+text = "Training"
+autowrap_mode = 2
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -396.0
+offset_top = -136.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "Start Game"
+
+[node name="IntroSection" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -204.0
+offset_right = 56.0
+offset_bottom = -164.0
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="IntroSection"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Welcome onboard."
+
+[node name="Label2" type="Label" parent="IntroSection"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 475.0
+offset_bottom = 81.0
+text = "Your job is simple - each day, you have a quota to meet. Mine enough to meet the quota, then leave in the ship."
+autowrap_mode = 2
+
+[node name="Label3" type="Label" parent="IntroSection"]
+layout_mode = 0
+offset_top = 96.0
+offset_right = 470.0
+offset_bottom = 145.0
+text = "You've been provided with several tools to get you started. All of them share the same POWER, so you'll need to manage that throughout the day. However, you can recharge your power at the ship if you run out."
+autowrap_mode = 2
+
+[node name="Label4" type="Label" parent="IntroSection"]
+layout_mode = 0
+offset_top = 208.0
+offset_right = 470.0
+offset_bottom = 283.0
+text = "You earn double pay for everything you can mine working overtime (past 9:00PM). However, nighttime is much more dangerous."
+autowrap_mode = 2
+
+[node name="Label5" type="Label" parent="IntroSection"]
+offset_top = 304.0
+offset_right = 470.0
+offset_bottom = 379.0
+text = "If you stay out until 12:00AM, the ship will leave without you."
+autowrap_mode = 2
+
+[node name="ToolsSection" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 570.0
+offset_top = 347.0
+offset_right = 610.0
+offset_bottom = 387.0
+
+[node name="Label" type="Label" parent="ToolsSection"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Here are the standard tools you've been given:"
+
+[node name="Drill" type="Control" parent="ToolsSection"]
+anchors_preset = 0
+offset_top = 15.0
+offset_right = 40.0
+offset_bottom = 55.0
+
+[node name="TextureRect" type="TextureRect" parent="ToolsSection/Drill"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture = ExtResource("1_fhpun")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ToolsSection/Drill"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 8.0
+offset_right = 134.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 24
+text = "Drill"
+
+[node name="Label2" type="Label" parent="ToolsSection/Drill"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 38.0
+offset_right = 252.0
+offset_bottom = 61.0
+text = "Used to mine objects."
+
+[node name="Sword" type="Control" parent="ToolsSection"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 65.0
+offset_right = 40.0
+offset_bottom = 105.0
+
+[node name="TextureRect" type="TextureRect" parent="ToolsSection/Sword"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture = ExtResource("2_sh6cj")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ToolsSection/Sword"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 8.0
+offset_right = 134.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 24
+text = "Sword"
+
+[node name="Label2" type="Label" parent="ToolsSection/Sword"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 38.0
+offset_right = 252.0
+offset_bottom = 61.0
+text = "Used to defend against monsters."
+
+[node name="Flashlight" type="Control" parent="ToolsSection"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 115.0
+offset_right = 40.0
+offset_bottom = 155.0
+
+[node name="TextureRect" type="TextureRect" parent="ToolsSection/Flashlight"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_e5qe3")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="ToolsSection/Flashlight"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 8.0
+offset_right = 134.0
+offset_bottom = 42.0
+theme_override_font_sizes/font_size = 24
+text = "Flashlight"
+
+[node name="Label2" type="Label" parent="ToolsSection/Flashlight"]
+layout_mode = 0
+offset_left = 85.0
+offset_top = 38.0
+offset_right = 252.0
+offset_bottom = 61.0
+text = "Helps you see in the mines."
+
+[node name="ControlsSection" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 570.0
+offset_top = 180.0
+offset_right = 610.0
+offset_bottom = 220.0
+
+[node name="Label" type="Label" parent="ControlsSection"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Game Controls"
+
+[node name="Label2" type="Label" parent="ControlsSection"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 80.0
+offset_bottom = 55.0
+text = "• WASD to move
+• 12345 to switch between items
+• Left click to use items (can be held)
+• F to toggle flashlight
+• Esc to pause game"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

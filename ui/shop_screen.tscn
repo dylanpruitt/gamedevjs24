@@ -1,12 +1,17 @@
-[gd_scene load_steps=9 format=3 uid="uid://butmr7erferem"]
+[gd_scene load_steps=14 format=3 uid="uid://butmr7erferem"]
 
-[ext_resource type="Texture2D" uid="uid://cpbs6cgm0dr4p" path="res://assets/brian_sketch.png" id="1_jnktt"]
-[ext_resource type="Script" path="res://ui/brian.gd" id="1_pyxk8"]
 [ext_resource type="Script" path="res://ui/shop_screen.gd" id="1_sejj0"]
+[ext_resource type="Texture2D" uid="uid://dr6w84rtrqwri" path="res://assets/brian.png" id="2_edear"]
+[ext_resource type="Script" path="res://ui/bomb_item.gd" id="3_oxsdt"]
 [ext_resource type="AudioStream" uid="uid://biwwd82c5wlfq" path="res://assets/music/shop.ogg" id="3_q8i1k"]
 [ext_resource type="AudioStream" uid="uid://bm75dtxpyuoad" path="res://assets/sfx/money.wav" id="4_jqrre"]
-[ext_resource type="Script" path="res://ui/buyable_item.gd" id="6_6u6pv"]
+[ext_resource type="Texture2D" uid="uid://rfrhohelf7ev" path="res://assets/bomb.png" id="5_60oqp"]
+[ext_resource type="Script" path="res://ui/warp_item.gd" id="6_hpr6f"]
 [ext_resource type="PackedScene" uid="uid://dimlx1bs11c3" path="res://components/price_component.tscn" id="6_oosfl"]
+[ext_resource type="Texture2D" uid="uid://3hwommce6ydi" path="res://assets/warp.png" id="6_svk6w"]
+[ext_resource type="Texture2D" uid="uid://c83hagtehbkrc" path="res://assets/speed.png" id="7_jd8rq"]
+[ext_resource type="AudioStream" uid="uid://cxdif4e55j0hk" path="res://assets/sfx/too_broke.ogg" id="8_c2wut"]
+[ext_resource type="Script" path="res://ui/speed_item.gd" id="8_cqoiq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nm8mk"]
 size = Vector2(246, 437)
@@ -16,16 +21,27 @@ script = ExtResource("1_sejj0")
 
 [node name="Brian" type="Area2D" parent="."]
 position = Vector2(153, 405)
-script = ExtResource("1_pyxk8")
 metadata/_edit_group_ = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Brian"]
 scale = Vector2(4, 4)
-texture = ExtResource("1_jnktt")
+texture = ExtResource("2_edear")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Brian"]
 position = Vector2(-3, -4.5)
 shape = SubResource("RectangleShape2D_nm8mk")
+
+[node name="BrianText" type="Label" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 40.0
+offset_top = -124.0
+offset_right = 506.0
+offset_bottom = -90.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "New guy? You're in some deep juju now."
 
 [node name="TabContainer" type="Control" parent="."]
 layout_mode = 3
@@ -59,45 +75,196 @@ grow_horizontal = 2
 theme_override_font_sizes/font_size = 36
 text = "Upgrades"
 
-[node name="BuyableItem" type="Control" parent="."]
+[node name="Items" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 379.0
-offset_top = 199.0
-offset_right = 419.0
-offset_bottom = 239.0
-script = ExtResource("6_6u6pv")
+offset_left = 339.0
+offset_top = 99.0
+offset_right = 379.0
+offset_bottom = 139.0
 
-[node name="Label" type="Label" parent="BuyableItem"]
+[node name="Label" type="Label" parent="Items"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 24
+text = "Items"
+
+[node name="HSeparator" type="HSeparator" parent="Items"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 540.0
+offset_bottom = 36.0
+
+[node name="Bombs" type="Control" parent="Items"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 80.0
+script = ExtResource("3_oxsdt")
+
+[node name="Label" type="Label" parent="Items/Bombs"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
+offset_left = 65.0
 offset_top = -17.0
-offset_right = 131.0
+offset_right = 196.0
 offset_bottom = 17.0
 grow_vertical = 2
 tooltip_text = "Used to blow up rocks in mining."
 mouse_filter = 1
 theme_override_font_sizes/font_size = 24
-text = "Bomb - $30"
+text = "Bomb - $10"
 
-[node name="Button" type="Button" parent="BuyableItem"]
+[node name="Label2" type="Label" parent="Items/Bombs"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 37.0
+offset_right = 237.0
+offset_bottom = 60.0
+text = "Used to destroy rocks."
+
+[node name="Button" type="Button" parent="Items/Bombs"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = 180.0
-offset_top = -15.5
-offset_right = 276.0
-offset_bottom = 15.5
+offset_left = 380.0
+offset_top = -7.5
+offset_right = 520.0
+offset_bottom = 34.5
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_font_sizes/font_size = 24
 text = "Buy item"
 
-[node name="PriceComponent" parent="BuyableItem" instance=ExtResource("6_oosfl")]
+[node name="PriceComponent" parent="Items/Bombs" instance=ExtResource("6_oosfl")]
+
+[node name="TextureRect" type="TextureRect" parent="Items/Bombs"]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+texture = ExtResource("5_60oqp")
+stretch_mode = 5
+
+[node name="Speed" type="Control" parent="Items"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 120.0
+offset_right = 40.0
+offset_bottom = 160.0
+script = ExtResource("8_cqoiq")
+
+[node name="Label" type="Label" parent="Items/Speed"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 65.0
+offset_top = -17.0
+offset_right = 196.0
+offset_bottom = 17.0
+grow_vertical = 2
+tooltip_text = "Used to blow up rocks in mining."
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Speed - $15"
+
+[node name="Label2" type="Label" parent="Items/Speed"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 37.0
+offset_right = 237.0
+offset_bottom = 60.0
+text = "Makes user faster for 25 seconds."
+
+[node name="Button" type="Button" parent="Items/Speed"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 380.0
+offset_top = -7.5
+offset_right = 520.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Buy item"
+
+[node name="PriceComponent" parent="Items/Speed" instance=ExtResource("6_oosfl")]
+price = 15
+
+[node name="TextureRect" type="TextureRect" parent="Items/Speed"]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+texture = ExtResource("7_jd8rq")
+stretch_mode = 5
+
+[node name="Warp" type="Control" parent="Items"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 200.0
+offset_right = 40.0
+offset_bottom = 240.0
+script = ExtResource("6_hpr6f")
+
+[node name="Label" type="Label" parent="Items/Warp"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 65.0
+offset_top = -17.0
+offset_right = 196.0
+offset_bottom = 17.0
+grow_vertical = 2
+tooltip_text = "Used to blow up rocks in mining."
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Warp - $40"
+
+[node name="Label2" type="Label" parent="Items/Warp"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 37.0
+offset_right = 237.0
+offset_bottom = 60.0
+text = "Immediately warps user back to the ship."
+
+[node name="Button" type="Button" parent="Items/Warp"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 380.0
+offset_top = -7.5
+offset_right = 520.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Buy item"
+
+[node name="PriceComponent" parent="Items/Warp" instance=ExtResource("6_oosfl")]
+price = 40
+
+[node name="TextureRect" type="TextureRect" parent="Items/Warp"]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+texture = ExtResource("6_svk6w")
+stretch_mode = 5
 
 [node name="MoneyLabel" type="Label" parent="."]
 anchors_preset = 1
@@ -111,6 +278,21 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 48
 text = "$30"
 
+[node name="ContinueButton" type="Button" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -331.0
+offset_top = -136.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 64
+text = "Continue"
+
 [node name="ShopBGM" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_q8i1k")
 autoplay = true
@@ -119,6 +301,28 @@ autoplay = true
 stream = ExtResource("4_jqrre")
 volume_db = 6.0
 
-[connection signal="pressed" from="BuyableItem/Button" to="BuyableItem" method="_on_button_pressed"]
-[connection signal="item_bought" from="BuyableItem/PriceComponent" to="." method="_on_item_bought"]
-[connection signal="too_broke" from="BuyableItem/PriceComponent" to="." method="_on_too_broke"]
+[node name="TooBrokeSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_c2wut")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 60.0
+offset_top = 40.0
+offset_right = 232.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 64
+text = "SHOP"
+
+[connection signal="input_event" from="Brian" to="." method="_on_brian_input_event"]
+[connection signal="pressed" from="Items/Bombs/Button" to="Items/Bombs" method="_on_button_pressed"]
+[connection signal="item_bought" from="Items/Bombs/PriceComponent" to="." method="_on_item_bought"]
+[connection signal="item_bought" from="Items/Bombs/PriceComponent" to="Items/Bombs" method="_on_item_bought"]
+[connection signal="too_broke" from="Items/Bombs/PriceComponent" to="." method="_on_too_broke"]
+[connection signal="pressed" from="Items/Speed/Button" to="Items/Speed" method="_on_button_pressed"]
+[connection signal="item_bought" from="Items/Speed/PriceComponent" to="." method="_on_item_bought"]
+[connection signal="item_bought" from="Items/Speed/PriceComponent" to="Items/Speed" method="_on_item_bought"]
+[connection signal="too_broke" from="Items/Speed/PriceComponent" to="." method="_on_too_broke"]
+[connection signal="pressed" from="Items/Warp/Button" to="Items/Warp" method="_on_button_pressed"]
+[connection signal="item_bought" from="Items/Warp/PriceComponent" to="." method="_on_item_bought"]
+[connection signal="item_bought" from="Items/Warp/PriceComponent" to="Items/Warp" method="_on_item_bought"]
+[connection signal="too_broke" from="Items/Warp/PriceComponent" to="." method="_on_too_broke"]
+[connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

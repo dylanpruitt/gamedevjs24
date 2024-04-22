@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://flashlight.gd" id="2_7pxuh"]
 [ext_resource type="Texture2D" uid="uid://ctv6t6bwik104" path="res://assets/flashlight.png" id="2_7qpma"]
-[ext_resource type="Script" path="res://components/power_drain.gd" id="3_vvrij"]
+[ext_resource type="PackedScene" uid="uid://cbjaw7uwcmwh2" path="res://components/power_drain_component.tscn" id="3_evxh8"]
 [ext_resource type="Texture2D" uid="uid://clxr2d57y01p4" path="res://assets/lighting_test2.png" id="4_byg5b"]
 [ext_resource type="AudioStream" uid="uid://borcu5qqbnyhc" path="res://assets/sfx/flashlight_toggle.wav" id="5_e3gey"]
 
@@ -24,9 +24,7 @@ script = ExtResource("2_7pxuh")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 collide_with_areas = true
 
-[node name="PowerDrainComponent" type="Node" parent="."]
-script = ExtResource("3_vvrij")
-power_drain = 10
+[node name="PowerDrainComponent" parent="." instance=ExtResource("3_evxh8")]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(35, 0)

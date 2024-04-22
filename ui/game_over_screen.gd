@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-signal play_button_pressed
-
 # Used internally to tell when typing effects finish.
 signal typing_finished
 
@@ -91,7 +89,8 @@ func type_letter(letter):
 
 func _on_play_again_pressed():
 	print("playing again...")
-	play_button_pressed.emit()
+	GlobalVariables.reset_globals()
+	get_tree().change_scene_to_file("res://ui/tutorial_screen.tscn")
 
 func _on_exit_game_pressed():
 	print("Exiting game...")

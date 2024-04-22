@@ -12,8 +12,3 @@ func _ready():
 	explosion.position = position
 	get_tree().root.add_child(explosion)
 	queue_free()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass

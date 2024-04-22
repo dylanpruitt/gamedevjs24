@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b04hffmildfvj"]
+
+[ext_resource type="Script" path="res://entities/player/speed_modifier.gd" id="1_uinpg"]
+
+[node name="Speed" type="Node"]
+script = ExtResource("1_uinpg")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 25.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bf5pgq2mu3vjd"]
+
+[ext_resource type="Texture2D" uid="uid://3hwommce6ydi" path="res://assets/warp.png" id="1_8aut4"]
+[ext_resource type="Script" path="res://entities/warp_item/warp_item.gd" id="1_wc4ql"]
+[ext_resource type="Script" path="res://components/amount_component.gd" id="2_0i6j0"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_aty3e"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_8aut4")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="WarpItem" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_aty3e")
+script = ExtResource("1_wc4ql")
+cooldown_seconds = 20.0
+
+[node name="AmountComponent" type="Node" parent="."]
+script = ExtResource("2_0i6j0")
+
+[node name="Cooldown" type="Timer" parent="."]
+one_shot = true
