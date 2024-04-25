@@ -78,6 +78,7 @@ text = "You earn double pay for everything you can mine working overtime (past 9
 autowrap_mode = 2
 
 [node name="Label5" type="Label" parent="IntroSection"]
+layout_mode = 0
 offset_top = 304.0
 offset_right = 470.0
 offset_bottom = 379.0

@@ -1,6 +1,7 @@
 extends Node2D
 
 signal score_changed
+signal player_found_item
 
 var player_score = 0
 var player_money = 0
@@ -9,6 +10,10 @@ var player_found_items = {}
 var num_bombs = 0
 var num_warps = 0
 var num_speeds = 0
+
+var has_sword_upgrade = false
+var has_drill_upgrade1 = false
+var has_health_upgrade = false
 
 var quota = 15
 
@@ -41,6 +46,9 @@ func reset_globals():
 	num_speeds = 0
 	num_warps = 0
 	previous_node = null
+	has_sword_upgrade = false
+	has_drill_upgrade1 = false
+	has_health_upgrade = false
 
 func add_found_item(item):
 	# item is tuple with [name, value]
@@ -55,6 +63,8 @@ func add_found_item(item):
 			player_found_items[item[0]] = [item[1], 0, 1]
 		else:
 			player_found_items[item[0]] = [item[1], 1, 0]
+
+	player_found_item.emit()
 
 func update_player_score(delta):
 	player_score += delta

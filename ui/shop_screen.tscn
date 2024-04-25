@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://butmr7erferem"]
+[gd_scene load_steps=20 format=3 uid="uid://butmr7erferem"]
 
 [ext_resource type="Script" path="res://ui/shop_screen.gd" id="1_sejj0"]
 [ext_resource type="Texture2D" uid="uid://dr6w84rtrqwri" path="res://assets/brian.png" id="2_edear"]
@@ -12,6 +12,12 @@
 [ext_resource type="Texture2D" uid="uid://c83hagtehbkrc" path="res://assets/speed.png" id="7_jd8rq"]
 [ext_resource type="AudioStream" uid="uid://cxdif4e55j0hk" path="res://assets/sfx/too_broke.ogg" id="8_c2wut"]
 [ext_resource type="Script" path="res://ui/speed_item.gd" id="8_cqoiq"]
+[ext_resource type="Script" path="res://ui/armor_upgrade.gd" id="10_82svw"]
+[ext_resource type="Texture2D" uid="uid://didvx3ey6cb82" path="res://assets/armor_icon.png" id="11_53vai"]
+[ext_resource type="Script" path="res://ui/sword_upgrade.gd" id="11_usqkc"]
+[ext_resource type="Script" path="res://ui/drill_upgrade1.gd" id="12_wlvkq"]
+[ext_resource type="Texture2D" uid="uid://c2uo3cr547k3d" path="res://assets/sword.png" id="13_qedsg"]
+[ext_resource type="Texture2D" uid="uid://dn4xhkjgw2ddg" path="res://assets/drill_icon.png" id="15_uxtam"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nm8mk"]
 size = Vector2(246, 437)
@@ -60,6 +66,7 @@ offset_top = 16.0
 offset_right = 150.0
 offset_bottom = 74.0
 theme_override_font_sizes/font_size = 36
+disabled = true
 text = "Items"
 
 [node name="UpgradeTab" type="Button" parent="TabContainer"]
@@ -266,6 +273,199 @@ offset_bottom = 60.0
 texture = ExtResource("6_svk6w")
 stretch_mode = 5
 
+[node name="Upgrades" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 339.0
+offset_top = 99.0
+offset_right = 379.0
+offset_bottom = 139.0
+
+[node name="Label" type="Label" parent="Upgrades"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_font_sizes/font_size = 24
+text = "Upgrades"
+
+[node name="HSeparator" type="HSeparator" parent="Upgrades"]
+layout_mode = 0
+offset_top = 32.0
+offset_right = 540.0
+offset_bottom = 36.0
+
+[node name="Armor" type="Control" parent="Upgrades"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 40.0
+offset_right = 40.0
+offset_bottom = 80.0
+script = ExtResource("10_82svw")
+
+[node name="Label" type="Label" parent="Upgrades/Armor"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 65.0
+offset_top = -17.0
+offset_right = 196.0
+offset_bottom = 17.0
+grow_vertical = 2
+tooltip_text = "Used to blow up rocks in mining."
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Armor - $25"
+
+[node name="Label2" type="Label" parent="Upgrades/Armor"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 37.0
+offset_right = 237.0
+offset_bottom = 60.0
+text = "Gives you an additional 100 health."
+
+[node name="Button" type="Button" parent="Upgrades/Armor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 380.0
+offset_top = -7.5
+offset_right = 520.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Buy item"
+
+[node name="PriceComponent" parent="Upgrades/Armor" instance=ExtResource("6_oosfl")]
+price = 25
+
+[node name="TextureRect" type="TextureRect" parent="Upgrades/Armor"]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+texture = ExtResource("11_53vai")
+stretch_mode = 5
+
+[node name="Sword+" type="Control" parent="Upgrades"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 120.0
+offset_right = 40.0
+offset_bottom = 160.0
+script = ExtResource("11_usqkc")
+
+[node name="Label" type="Label" parent="Upgrades/Sword+"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 65.0
+offset_top = -17.0
+offset_right = 196.0
+offset_bottom = 17.0
+grow_vertical = 2
+tooltip_text = "Used to blow up rocks in mining."
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Sword Power - $35"
+
+[node name="Label2" type="Label" parent="Upgrades/Sword+"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 37.0
+offset_right = 237.0
+offset_bottom = 60.0
+text = "Your sword deals much more damage."
+
+[node name="Button" type="Button" parent="Upgrades/Sword+"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 380.0
+offset_top = -7.5
+offset_right = 520.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Buy item"
+
+[node name="PriceComponent" parent="Upgrades/Sword+" instance=ExtResource("6_oosfl")]
+price = 35
+
+[node name="TextureRect" type="TextureRect" parent="Upgrades/Sword+"]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+texture = ExtResource("13_qedsg")
+stretch_mode = 5
+
+[node name="Drill+" type="Control" parent="Upgrades"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 200.0
+offset_right = 40.0
+offset_bottom = 240.0
+script = ExtResource("12_wlvkq")
+
+[node name="Label" type="Label" parent="Upgrades/Drill+"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 65.0
+offset_top = -17.0
+offset_right = 196.0
+offset_bottom = 17.0
+grow_vertical = 2
+tooltip_text = "Used to blow up rocks in mining."
+mouse_filter = 1
+theme_override_font_sizes/font_size = 24
+text = "Drill Power - $60"
+
+[node name="Label2" type="Label" parent="Upgrades/Drill+"]
+layout_mode = 0
+offset_left = 65.0
+offset_top = 37.0
+offset_right = 237.0
+offset_bottom = 60.0
+text = "Your drill breaks rocks twice as fast."
+
+[node name="Button" type="Button" parent="Upgrades/Drill+"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 380.0
+offset_top = -7.5
+offset_right = 520.0
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Buy item"
+
+[node name="PriceComponent" parent="Upgrades/Drill+" instance=ExtResource("6_oosfl")]
+price = 60
+
+[node name="TextureRect" type="TextureRect" parent="Upgrades/Drill+"]
+layout_mode = 0
+offset_right = 60.0
+offset_bottom = 60.0
+texture = ExtResource("15_uxtam")
+stretch_mode = 5
+
 [node name="MoneyLabel" type="Label" parent="."]
 anchors_preset = 1
 anchor_left = 1.0
@@ -313,6 +513,8 @@ theme_override_font_sizes/font_size = 64
 text = "SHOP"
 
 [connection signal="input_event" from="Brian" to="." method="_on_brian_input_event"]
+[connection signal="pressed" from="TabContainer/ItemTab" to="." method="_on_item_tab_pressed"]
+[connection signal="pressed" from="TabContainer/UpgradeTab" to="." method="_on_upgrade_tab_pressed"]
 [connection signal="pressed" from="Items/Bombs/Button" to="Items/Bombs" method="_on_button_pressed"]
 [connection signal="item_bought" from="Items/Bombs/PriceComponent" to="." method="_on_item_bought"]
 [connection signal="item_bought" from="Items/Bombs/PriceComponent" to="Items/Bombs" method="_on_item_bought"]
@@ -325,4 +527,16 @@ text = "SHOP"
 [connection signal="item_bought" from="Items/Warp/PriceComponent" to="." method="_on_item_bought"]
 [connection signal="item_bought" from="Items/Warp/PriceComponent" to="Items/Warp" method="_on_item_bought"]
 [connection signal="too_broke" from="Items/Warp/PriceComponent" to="." method="_on_too_broke"]
+[connection signal="pressed" from="Upgrades/Armor/Button" to="Upgrades/Armor" method="_on_button_pressed"]
+[connection signal="item_bought" from="Upgrades/Armor/PriceComponent" to="." method="_on_item_bought"]
+[connection signal="item_bought" from="Upgrades/Armor/PriceComponent" to="Upgrades/Armor" method="_on_item_bought"]
+[connection signal="too_broke" from="Upgrades/Armor/PriceComponent" to="." method="_on_too_broke"]
+[connection signal="pressed" from="Upgrades/Sword+/Button" to="Upgrades/Sword+" method="_on_button_pressed"]
+[connection signal="item_bought" from="Upgrades/Sword+/PriceComponent" to="." method="_on_item_bought"]
+[connection signal="item_bought" from="Upgrades/Sword+/PriceComponent" to="Upgrades/Sword+" method="_on_item_bought"]
+[connection signal="too_broke" from="Upgrades/Sword+/PriceComponent" to="." method="_on_too_broke"]
+[connection signal="pressed" from="Upgrades/Drill+/Button" to="Upgrades/Drill+" method="_on_button_pressed"]
+[connection signal="item_bought" from="Upgrades/Drill+/PriceComponent" to="." method="_on_item_bought"]
+[connection signal="item_bought" from="Upgrades/Drill+/PriceComponent" to="Upgrades/Drill+" method="_on_item_bought"]
+[connection signal="too_broke" from="Upgrades/Drill+/PriceComponent" to="." method="_on_too_broke"]
 [connection signal="pressed" from="ContinueButton" to="." method="_on_continue_button_pressed"]

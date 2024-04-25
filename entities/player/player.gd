@@ -12,7 +12,7 @@ var power = 500
 var max_power = 500
 var walking_cutscene = false
 var charging = false
-var charge_rate = 10
+var charge_rate = 30
 var screen_size
 
 @onready var inventory = [$PlayerSprite/Drill, $PlayerSprite/Sword, $PlayerSprite/BombItem,
@@ -23,6 +23,11 @@ var screen_size
 func _ready():
 	screen_size = get_viewport_rect().size
 	$PlayerSprite/Drill.hide()
+
+	if GlobalVariables.has_health_upgrade:
+		$HealthComponent.max_health = 200
+		$HealthComponent.health = $HealthComponent.max_health
+		get_parent().get_node("HUD").update_health($HealthComponent.health)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -67,7 +72,10 @@ func _process(delta):
 		if power > 0:
 			current_item.play()
 		$PlayerSprite/Flashlight.visible = false
-	
+		if $PlayerSprite/Flashlight.toggled:
+			$PlayerSprite/Flashlight.toggle_light()
+			light_toggled.emit(false)
+
 	if current_item.in_use:
 		if !current_item.fixed_angle:
 			var mouse_position = get_global_mouse_position()
@@ -99,6 +107,7 @@ func _process(delta):
 
 	if power <= 0:
 		$PlayerSprite/Flashlight.out_of_power = true
+		light_toggled.emit(false)
 	else:
 		$PlayerSprite/Flashlight.out_of_power = false
 
@@ -130,8 +139,22 @@ func add_power(delta):
 		power += delta
 
 func _on_health_changed(old_value, new_value):
+	if old_value > new_value:
+		hurt_modulate_effects()
+		$HurtSFX.play()
+
 	health_changed.emit(old_value, new_value)
 
+func hurt_modulate_effects():
+	var normal_mod = Color.WHITE
+
+	$PlayerSprite.modulate = Color.RED
+	await get_tree().create_timer(0.05).timeout
+	$PlayerSprite.modulate = Color(1, 0.5, 0.5, 1)
+	await get_tree().create_timer(0.05).timeout
+	$PlayerSprite.modulate = Color(1, 0.75, 0.75, 1)
+	await get_tree().create_timer(0.05).timeout
+	$PlayerSprite.modulate = normal_mod
 
 func _on_drill_drained_power(delta):
 	power_changed.emit(power, power - delta)

@@ -28,7 +28,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_mpc4q")
 
 [node name="HealthComponent" parent="." instance=ExtResource("3_n8yxs")]
-health = 360
+health = 72
 immune_to = Array[int]([1])
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

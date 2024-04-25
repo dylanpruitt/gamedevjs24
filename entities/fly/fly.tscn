@@ -1,0 +1,129 @@
+[gd_scene load_steps=18 format=3 uid="uid://bu4a1egmrwi27"]
+
+[ext_resource type="PackedScene" uid="uid://wniglcht6m3o" path="res://components/health_component.tscn" id="1_3juxw"]
+[ext_resource type="Script" path="res://entities/fly/fly.gd" id="1_sktp8"]
+[ext_resource type="Texture2D" uid="uid://dcgwdi2g8leue" path="res://assets/fly_death.png" id="3_nwapv"]
+[ext_resource type="Texture2D" uid="uid://b46t8xqgdh30s" path="res://assets/fly.png" id="4_h18xk"]
+[ext_resource type="AudioStream" uid="uid://b4jta2qetp1nx" path="res://assets/sfx/damage2.ogg" id="4_y771h"]
+[ext_resource type="AudioStream" uid="uid://by7qkjuabepi0" path="res://assets/sfx/fly.ogg" id="6_2s5uf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75nmk"]
+atlas = ExtResource("3_nwapv")
+region = Rect2(0, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sap5w"]
+atlas = ExtResource("3_nwapv")
+region = Rect2(13, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0dxj"]
+atlas = ExtResource("3_nwapv")
+region = Rect2(26, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j4xv"]
+atlas = ExtResource("3_nwapv")
+region = Rect2(39, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jufs"]
+atlas = ExtResource("3_nwapv")
+region = Rect2(52, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jdbe2"]
+atlas = ExtResource("4_h18xk")
+region = Rect2(0, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt6yl"]
+atlas = ExtResource("4_h18xk")
+region = Rect2(0, 5, 13, 5)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_oqpw0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75nmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sap5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0dxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j4xv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jufs")
+}],
+"loop": true,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jdbe2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt6yl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8fko7"]
+size = Vector2(15, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qjf5r"]
+size = Vector2(35, 44)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ucu0j"]
+size = Vector2(277, 254)
+
+[node name="Fly" type="RigidBody2D"]
+mass = 0.8
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 5.0
+script = ExtResource("1_sktp8")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_3juxw")]
+health = 4.0
+immune_to = Array[int]([0])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_oqpw0")
+frame_progress = 0.72695
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_8fko7")
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_y771h")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(24, 0)
+shape = SubResource("RectangleShape2D_qjf5r")
+
+[node name="AggroRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
+shape = SubResource("RectangleShape2D_ucu0j")
+
+[node name="AggroSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_2s5uf")
+volume_db = -3.0
+max_distance = 500.0
+attenuation = 1.68179
+
+[connection signal="entity_died" from="HealthComponent" to="." method="_on_entity_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="body_entered" from="AggroRange" to="." method="_on_aggro_range_body_entered"]
+[connection signal="finished" from="AggroSFX" to="." method="_on_aggro_sfx_finished"]

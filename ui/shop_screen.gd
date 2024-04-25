@@ -40,6 +40,19 @@ func _on_continue_button_pressed():
 	get_tree().change_scene_to_file("res://main.tscn")
 
 
-func _on_brian_input_event(viewport, event, shape_idx):
+func _on_brian_input_event(_viewport, event, _shape_idx):
 	if event is InputEventMouseButton and event.pressed:
 		$BrianText.text = quotes_idle.pick_random()
+
+
+func _on_item_tab_pressed():
+	$Items.show()
+	$Upgrades.hide()
+	$TabContainer/ItemTab.disabled = true
+	$TabContainer/UpgradeTab.disabled = false
+
+func _on_upgrade_tab_pressed():
+	$Items.hide()
+	$Upgrades.show()
+	$TabContainer/ItemTab.disabled = false
+	$TabContainer/UpgradeTab.disabled = true

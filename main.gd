@@ -1,5 +1,7 @@
 extends Node
 
+var already_died = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
@@ -62,7 +64,8 @@ func _on_clock_updated(new_time):
 		$HUD.update_clock(new_time)
 		if new_time == [18,0]:
 			$Ship/PointLight2D.show()
-			$Ship/ToggleSFX.play()
+			if has_node("Overworld"):
+				$Ship/ToggleSFX.play()
 
 func _on_player_health_changed(_old, new):
 	$HUD.update_health(new)
@@ -71,13 +74,24 @@ func _on_player_power_changed(_old, new):
 	$HUD.update_power(new)
 
 func _on_ship_left_moon():
+	GlobalVariables.num_bombs = $Player/PlayerSprite/BombItem/AmountComponent.amount
+	GlobalVariables.num_speeds = $Player/PlayerSprite/SpeedItem/AmountComponent.amount
+	GlobalVariables.num_warps = $Player/PlayerSprite/WarpItem/AmountComponent.amount
 	print("leaving moon...")
 	get_tree().change_scene_to_file("res://ui/results_screen.tscn")
 
 func _on_player_died():
-		GlobalVariables.cause_of_death = GlobalVariables.CausesOfDeath.KILLED
-		GlobalVariables.death_description = "You died a gruesome death."
-		get_tree().change_scene_to_file("res://ui/game_over_screen.tscn")
+	if already_died:
+		return
+
+	already_died = true
+	$Player/PlayerSprite.play("dead")
+	$Player.set_process(false)
+	$GameOverSFX.play()
+	await get_tree().create_timer(3.0).timeout
+	GlobalVariables.cause_of_death = GlobalVariables.CausesOfDeath.KILLED
+	GlobalVariables.death_description = "You died a gruesome death."
+	get_tree().change_scene_to_file("res://ui/game_over_screen.tscn")
 
 # Code handling transition from overworld to the cave.
 func _on_scene_transition_area_player_entered():

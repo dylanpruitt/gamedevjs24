@@ -118,3 +118,19 @@ offset_right = 125.0
 offset_bottom = 95.0
 texture = ExtResource("3_v4x52")
 stretch_mode = 4
+
+[node name="InventoryLabel" type="Label" parent="."]
+visible = false
+offset_left = 824.0
+offset_top = 72.0
+offset_right = 943.0
+offset_bottom = 95.0
+text = "Collected items"
+horizontal_alignment = 2
+
+[node name="CollectedItemsLabel" type="Label" parent="."]
+offset_left = 706.0
+offset_top = 96.0
+offset_right = 943.0
+offset_bottom = 119.0
+horizontal_alignment = 2

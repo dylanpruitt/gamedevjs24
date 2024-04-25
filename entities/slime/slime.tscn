@@ -1,0 +1,108 @@
+[gd_scene load_steps=15 format=3 uid="uid://dmbr3suedflp6"]
+
+[ext_resource type="PackedScene" uid="uid://wniglcht6m3o" path="res://components/health_component.tscn" id="1_0wlfc"]
+[ext_resource type="Script" path="res://entities/slime/slime.gd" id="1_7yhg1"]
+[ext_resource type="Texture2D" uid="uid://c1cg62tgokk3o" path="res://assets/temp_slime.png" id="2_37tky"]
+[ext_resource type="AudioStream" uid="uid://b4jta2qetp1nx" path="res://assets/sfx/damage2.ogg" id="3_2o3fr"]
+[ext_resource type="Texture2D" uid="uid://dri30sibeytl8" path="res://assets/slime_death.png" id="3_gg3u8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8hvs"]
+atlas = ExtResource("3_gg3u8")
+region = Rect2(0, 0, 19, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fjkhw"]
+atlas = ExtResource("3_gg3u8")
+region = Rect2(19, 0, 19, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hgsos"]
+atlas = ExtResource("3_gg3u8")
+region = Rect2(38, 0, 19, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jim5m"]
+atlas = ExtResource("3_gg3u8")
+region = Rect2(57, 0, 19, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ue85"]
+atlas = ExtResource("3_gg3u8")
+region = Rect2(76, 0, 19, 12)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51k8x"]
+atlas = ExtResource("3_gg3u8")
+region = Rect2(95, 0, 19, 12)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wg07s"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8hvs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fjkhw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hgsos")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jim5m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ue85")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51k8x")
+}],
+"loop": true,
+"name": &"death",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_37tky")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1x83c"]
+size = Vector2(15, 9)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0fby"]
+size = Vector2(35, 44)
+
+[node name="Slime" type="RigidBody2D"]
+gravity_scale = 0.0
+lock_rotation = true
+linear_damp = 5.0
+script = ExtResource("1_7yhg1")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_0wlfc")]
+health = 7.0
+immune_to = Array[int]([0])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_wg07s")
+animation = &"death"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_1x83c")
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_2o3fr")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+position = Vector2(24, 0)
+shape = SubResource("RectangleShape2D_x0fby")
+
+[connection signal="entity_died" from="HealthComponent" to="." method="_on_entity_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_changed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

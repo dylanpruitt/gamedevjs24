@@ -1,8 +1,8 @@
 extends Node2D
 
-@export var health: int = 100
+@export var health: float = 100.0
 @export var immune_to: Array[GlobalVariables.DamageTypes] = []
-var max_health = health
+@onready var max_health = health
 
 signal health_changed(old_value, new_value)
 signal entity_died

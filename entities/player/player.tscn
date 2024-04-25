@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=3 uid="uid://c6c1qt6n6vcex"]
+[gd_scene load_steps=28 format=3 uid="uid://c6c1qt6n6vcex"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_bvfsr"]
 [ext_resource type="Texture2D" uid="uid://c8xfj67d3jn72" path="res://assets/player_down.png" id="1_qhk4b"]
+[ext_resource type="Texture2D" uid="uid://dugipdol72hc6" path="res://assets/dead_player.png" id="2_jujkh"]
 [ext_resource type="Texture2D" uid="uid://gdio74efinfk" path="res://assets/player_right.png" id="2_xes56"]
 [ext_resource type="Texture2D" uid="uid://csbvb04m4f72k" path="res://assets/player_up.png" id="3_hnbr8"]
 [ext_resource type="PackedScene" uid="uid://monkduuu5cba" path="res://drill.tscn" id="5_sorlu"]
@@ -13,6 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://fbnjyplsonnp" path="res://assets/sfx/footsteps.ogg" id="9_5wqtx"]
 [ext_resource type="PackedScene" uid="uid://bh1jbcbl117l3" path="res://entities/speed_item/speed_item.tscn" id="9_ddntb"]
 [ext_resource type="PackedScene" uid="uid://bf5pgq2mu3vjd" path="res://entities/warp_item/warp_item.tscn" id="10_n7q74"]
+[ext_resource type="Texture2D" uid="uid://dmyefpxne14pu" path="res://assets/bomb_particle.png" id="11_poony"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0hqvu"]
 atlas = ExtResource("1_qhk4b")
@@ -52,6 +54,14 @@ region = Rect2(20, 0, 10, 12)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_xcc5t"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jujkh")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0hqvu")
@@ -95,6 +105,9 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_cyyjn"]
+light_mode = 1
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3awcs"]
 radius = 6.0
 height = 52.0
@@ -127,6 +140,36 @@ scale = Vector2(0.5, 0.5)
 
 [node name="WarpItem" parent="PlayerSprite" instance=ExtResource("10_n7q74")]
 scale = Vector2(0.5, 0.5)
+
+[node name="WarpLabel" type="Control" parent="PlayerSprite"]
+visible = false
+material = SubResource("CanvasItemMaterial_cyyjn")
+layout_mode = 3
+anchors_preset = 0
+offset_left = -8.5
+offset_top = -11.0
+offset_right = 10.5
+offset_bottom = 2.0
+
+[node name="Label" type="Label" parent="PlayerSprite/WarpLabel"]
+layout_mode = 1
+offset_right = 79.0
+offset_bottom = 23.0
+scale = Vector2(0.25, 0.25)
+text = "Warping..."
+
+[node name="WarpParticles" type="CPUParticles2D" parent="PlayerSprite"]
+emitting = false
+amount = 32
+one_shot = true
+texture = ExtResource("11_poony")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 0.8
+initial_velocity_max = 51.3
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+color = Color(0.32549, 0.784314, 0.447059, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_3awcs")

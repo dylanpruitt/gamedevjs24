@@ -2,7 +2,7 @@ extends Node2D
 
 @export var lifetime_seconds = 1.0
 @export var range_pixels = 30.0
-@export var damage = 200
+@export var damage = 100
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

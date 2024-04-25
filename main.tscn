@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://i5iyab4k5qyh"]
+[gd_scene load_steps=29 format=3 uid="uid://i5iyab4k5qyh"]
 
 [ext_resource type="PackedScene" uid="uid://daa0metoxw5bj" path="res://ui/hud.tscn" id="1_0hk7k"]
 [ext_resource type="Script" path="res://main.gd" id="1_ldknm"]
@@ -6,21 +6,23 @@
 [ext_resource type="PackedScene" uid="uid://c6c1qt6n6vcex" path="res://entities/player/player.tscn" id="4_4qah8"]
 [ext_resource type="Texture2D" uid="uid://b08sbv53r7kl7" path="res://assets/tiles/tileset_green.png" id="5_opsir"]
 [ext_resource type="PackedScene" uid="uid://b7rj44d2gu3qk" path="res://clock.tscn" id="6_wrasq"]
-[ext_resource type="PackedScene" uid="uid://ns673t3xmqdc" path="res://entities/rock/rock.tscn" id="7_pbey5"]
 [ext_resource type="PackedScene" uid="uid://cwcc6jsip6as4" path="res://scene_transition_area.tscn" id="8_spjm6"]
 [ext_resource type="AudioStream" uid="uid://b506rj1ynhg1p" path="res://assets/music/day_theme.ogg" id="9_dr28v"]
 [ext_resource type="Script" path="res://overworld_lighting.gd" id="9_jax82"]
 [ext_resource type="PackedScene" uid="uid://xc3eumu5bgcd" path="res://entities/ship/ship.tscn" id="10_87cvs"]
 [ext_resource type="PackedScene" uid="uid://c2fxn3d0xt32m" path="res://ui/ship_ui.tscn" id="10_aka17"]
+[ext_resource type="Script" path="res://spawns/spawn_rocks.gd" id="10_frj6f"]
 [ext_resource type="AudioStream" uid="uid://i468mtth1usm" path="res://assets/sfx/wind.ogg" id="10_xu3bs"]
 [ext_resource type="Script" path="res://ui/ship_ui.gd" id="11_2l7jm"]
-[ext_resource type="PackedScene" uid="uid://bta3db0nlvdq4" path="res://entities/small_rock/small_rock.tscn" id="11_ruhgt"]
+[ext_resource type="Script" path="res://spawns/spawn_coal.gd" id="12_5ywd0"]
 [ext_resource type="Texture2D" uid="uid://rfrhohelf7ev" path="res://assets/bomb.png" id="13_pkmrh"]
 [ext_resource type="Script" path="res://ui/inventory.gd" id="13_trfka"]
+[ext_resource type="AudioStream" uid="uid://cv08tasytxs7h" path="res://assets/sfx/damage1.ogg" id="15_mupun"]
 [ext_resource type="Texture2D" uid="uid://dn4xhkjgw2ddg" path="res://assets/drill_icon.png" id="16_b40f8"]
 [ext_resource type="Texture2D" uid="uid://c2uo3cr547k3d" path="res://assets/sword.png" id="17_1t1vx"]
 [ext_resource type="Texture2D" uid="uid://c83hagtehbkrc" path="res://assets/speed.png" id="20_om5mt"]
 [ext_resource type="Texture2D" uid="uid://3hwommce6ydi" path="res://assets/warp.png" id="21_hv20d"]
+[ext_resource type="AudioStream" uid="uid://ccyi8iym7rry2" path="res://assets/sfx/game_over.ogg" id="24_c1yaq"]
 
 [sub_resource type="Gradient" id="Gradient_gs3ub"]
 offsets = PackedFloat32Array(0, 0.385542, 0.620482, 0.789157)
@@ -81,6 +83,7 @@ script = ExtResource("1_ldknm")
 [node name="PauseMenu" parent="." instance=ExtResource("4_4gvw1")]
 
 [node name="Clock" parent="." instance=ExtResource("6_wrasq")]
+hour = 17
 
 [node name="Overworld" type="Node2D" parent="."]
 script = ExtResource("9_jax82")
@@ -91,57 +94,6 @@ scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_7yrsl")
 format = 2
 layer_0/tile_data = PackedInt32Array(0, 327681, 0, 1, 327681, 0, 2, 327681, 0, 3, 393217, 0, 4, 393217, 0, 5, 393217, 0, 6, 327681, 0, 7, 327681, 0, 8, 327681, 0, 9, 327681, 0, 10, 327681, 0, 11, 327681, 0, 12, 327681, 0, 13, 327681, 0, 14, 327681, 0, 65550, 327681, 0, 65549, 327681, 0, 65548, 327681, 0, 65547, 327681, 0, 65546, 327681, 0, 65545, 327681, 0, 65544, 327681, 0, 65543, 327681, 0, 65542, 393217, 0, 65541, 393217, 0, 65540, 393217, 0, 65539, 327681, 0, 65538, 327681, 0, 65537, 327681, 0, 65536, 393217, 0, 131077, 393217, 0, 131078, 393217, 0, 131079, 327681, 0, 720896, 327681, 0, 655360, 393217, 0, 589824, 393217, 0, 524288, 327681, 0, 458752, 327681, 0, 393216, 327681, 0, 327680, 327681, 0, 262144, 327681, 0, 196608, 393217, 0, 131072, 393217, 0, 131073, 327681, 0, 131074, 327681, 0, 131075, 327681, 0, 131076, 393217, 0, 196612, 393217, 0, 196613, 393217, 0, 196614, 393217, 0, 196615, 327681, 0, 196616, 327681, 0, 131080, 327681, 0, 589825, 393217, 0, 589826, 393217, 0, 655362, 393217, 0, 655361, 393217, 0, 720897, 327681, 0, 720898, 327681, 0, 720899, 327681, 0, 720900, 327681, 0, 524289, 393217, 0, 458753, 393217, 0, 196609, 393217, 0, 524292, 524289, 0, 458756, 458753, 0, 393220, 458753, 0, 393221, 458753, 0, 393222, 458753, 0, 393223, 458753, 0, 327688, 458753, 0, 327689, 458753, 0, 393225, 458753, 0, 458761, 458753, 0, 458760, 458753, 0, 524296, 458753, 0, 524295, 458753, 0, 589830, 458753, 0, 589831, 458753, 0, 655367, 262145, 0, 655368, 458753, 0, 589832, 458753, 0, 589833, 458753, 0, 524297, 458753, 0, 327687, 458753, 0, 327690, 458753, 0, 327691, 524289, 0, 393227, 458753, 0, 458764, 458753, 0, 458763, 458753, 0, 458762, 458753, 0, 524298, 458753, 0, 327692, 524289, 0, 262157, 458753, 0, 327693, 458753, 0, 327694, 458753, 0, 393230, 458753, 0, 458766, 458753, 0, 458765, 458753, 0, 524301, 458753, 0, 524300, 458753, 0, 524299, 458753, 0, 524294, 458753, 0, 524293, 458753, 0, 393219, 458753, 0, 327683, 458753, 0, 327682, 458753, 0, 327684, 458753, 0, 327685, 458753, 0, 458755, 458753, 0, 589828, 524289, 0, 458757, 524289, 0, 458758, 524289, 0, 393228, 524289, 0, 262155, 524289, 0, 262154, 524289, 0, 262156, 524289, 0, 196620, 524289, 0, 655374, 524289, 0, 655373, 524289, 0, 589837, 524289, 0, 589838, 524289, 0, 524302, 524289, 0, 524303, 524289, 0, 524304, 524289, 0, 458768, 458753, 0, 589840, 524289, 0, 589839, 262145, 0, 458767, 524289, 0, 458759, 262145, 0, 393224, 262145, 0, 327686, 262145, 0, 393226, 262145, 0, 393229, 262145, 0, 655370, 262145, 0, 589836, 262145, 0, 393218, 262145, 0, 262145, 131073, 0, 196611, 327681, 0, 327681, 131073, 0, 262148, 131073, 0, 262151, 131073, 0, 524290, 65537, 0, 655363, 65537, 0, 458754, 458753, 0, 393217, 458753, 0, 196610, 393217, 0, 262146, 458753, 0, 262147, 458753, 0, 262149, 458753, 0, 262150, 458753, 0, 524291, 458753, 0, 589827, 458753, 0, 655364, 458753, 0, 655365, 458753, 0, 589829, 458753, 0, 655366, 458753, 0, 720901, 327681, 0, 720902, 327681, 0, 720903, 327681, 0, 720904, 327681, 0, 720905, 327681, 0, 720906, 327681, 0, 720907, 327681, 0, 720908, 327681, 0, 720909, 327681, 0, 720910, 327681, 0, 720911, 327681, 0, 720912, 327681, 0, 720913, 327681, 0, 720914, 327681, 0, 720915, 327681, 0, 720916, 327681, 0, 720917, 327681, 0, 15, 327681, 0, 16, 327681, 0, 17, 327681, 0, 18, 327681, 0, 19, 327681, 0, 20, 327681, 0, 21, 327681, 0, 22, 327681, 0, 23, 327681, 0, 24, 327681, 0, 25, 327681, 0, 26, 327681, 0, 27, 327681, 0, 65563, 327681, 0, 131099, 327681, 0, 196635, 327681, 0, 262172, 327681, 0, 327708, 327681, 0, 393244, 327681, 0, 458780, 327681, 0, 524316, 327681, 0, 589852, 327681, 0, 655388, 327681, 0, 655387, 327681, 0, 720923, 327681, 0, 720924, 327681, 0, 720922, 327681, 0, 720921, 327681, 0, 720920, 327681, 0, 720919, 327681, 0, 720918, 327681, 0, 28, 327681, 0, 65564, 327681, 0, 131100, 327681, 0, 196636, 327681, 0, 131093, 589825, 0, 65551, 393217, 0, 65552, 393217, 0, 131088, 393217, 0, 131089, 393217, 0, 131090, 327681, 0, 196626, 327681, 0, 196627, 327681, 0, 131091, 327681, 0, 131092, 393217, 0, 65556, 393217, 0, 65555, 327681, 0, 65554, 327681, 0, 65553, 327681, 0, 655379, 393217, 0, 655380, 393217, 0, 589844, 393217, 0, 524308, 393217, 0, 458772, 393217, 0, 458771, 393217, 0, 393236, 393217, 0, 393237, 458753, 0, 458773, 393217, 0, 524309, 393217, 0, 589845, 393217, 0, 655381, 393217, 0, 655382, 393217, 0, 589846, 393217, 0, 655383, 393217, 0, 589847, 393217, 0, 196625, 458753, 0, 262161, 524289, 0, 327697, 458753, 0, 327698, 458753, 0, 327699, 458753, 0, 262163, 458753, 0, 262164, 458753, 0, 393240, 524289, 0, 327704, 458753, 0, 327705, 458753, 0, 262169, 262145, 0, 327706, 458753, 0, 327707, 458753, 0, 393243, 458753, 0, 393242, 458753, 0, 458778, 458753, 0, 458777, 458753, 0, 65557, 393217, 0, 65558, 393217, 0, 65559, 327681, 0, 131095, 327681, 0, 196631, 327681, 0, 262167, 393217, 0, 196630, 393217, 0, 131094, 393217, 0, 196632, 327681, 0, 65560, 327681, 0, 65561, 327681, 0, 65562, 327681, 0, 131098, 327681, 0, 131097, 327681, 0, 131096, 327681, 0, 196634, 327681, 0, 458775, 524289, 0, 393239, 524289, 0, 393241, 524289, 0, 327696, 524289, 0, 262160, 524289, 0, 262159, 524289, 0, 589843, 524289, 0, 524307, 524289, 0, 655384, 524289, 0, 589848, 524289, 0, 589849, 262145, 0, 655385, 524289, 0, 655386, 524289, 0, 458776, 458753, 0, 524312, 458753, 0, 524313, 458753, 0, 524314, 458753, 0, 589850, 458753, 0, 589851, 458753, 0, 524315, 458753, 0, 458779, 262145, 0, 524311, 262145, 0, 524310, 458753, 0, 458774, 458753, 0, 327701, 458753, 0, 327702, 458753, 0, 393238, 458753, 0, 327700, 262145, 0, 196628, 458753, 0, 196629, 458753, 0, 262165, 458753, 0, 262166, 262145, 0, 327703, 458753, 0, 262168, 458753, 0, 196633, 458753, 0, 262170, 458753, 0, 262171, 458753, 0, 655378, 262145, 0, 131086, 262145, 0, 196618, 262145, 0, 131081, 393217, 0, 131082, 393217, 0, 131083, 393217, 0, 655375, 458753, 0, 655376, 458753, 0, 655377, 458753, 0, 589841, 458753, 0, 589842, 458753, 0, 524306, 458753, 0, 655371, 458753, 0, 655372, 458753, 0, 262152, 458753, 0, 262153, 458753, 0, 196617, 458753, 0, 131085, 458753, 0, 196621, 458753, 0, 196622, 458753, 0, 196623, 458753, 0, 393232, 458753, 0, 393233, 458753, 0, 458770, 458753, 0, 393235, 131073, 0, 262162, 131073, 0, 131087, 131073, 0, 196619, 131073, 0, 655369, 131073, 0, 589835, 65537, 0, 262158, 65537, 0, 393234, 65537, 0, 131084, 65537, 0, 196624, 65537, 0, 327695, 458753, 0, 393231, 458753, 0, 589834, 458753, 0, 458769, 458753, 0, 524305, 458753, 0)
-
-[node name="Rock" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1314, 350)
-
-[node name="Rock2" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1250, 348)
-
-[node name="Rock3" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1316, 223)
-
-[node name="Rock4" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1251, 283)
-
-[node name="Rock5" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1016, 463)
-
-[node name="Rock6" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1448, 547)
-
-[node name="Rock7" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1510, 421)
-
-[node name="Rock8" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1505, 356)
-
-[node name="Rock9" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1437, 418)
-
-[node name="Rock10" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1755, 606)
-
-[node name="Rock11" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1705, 288)
-
-[node name="Rock12" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1627, 544)
-
-[node name="Rock13" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1756, 414)
-
-[node name="Rock14" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(677, 676)
-
-[node name="Rock15" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(925, 220)
-
-[node name="Rock16" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(1375, 284)
-
-[node name="Rock17" parent="Overworld" instance=ExtResource("7_pbey5")]
-position = Vector2(581, 443)
 
 [node name="SpawnFromCave" type="Marker2D" parent="Overworld"]
 position = Vector2(1376, 225)
@@ -159,7 +111,6 @@ position = Vector2(-3, -36)
 
 [node name="DayBGM" type="AudioStreamPlayer2D" parent="Overworld"]
 stream = ExtResource("9_dr28v")
-autoplay = true
 max_distance = 20000.0
 attenuation = 0.00164237
 
@@ -167,8 +118,154 @@ attenuation = 0.00164237
 stream = ExtResource("10_xu3bs")
 volume_db = 3.0
 
-[node name="SmallRock" parent="Overworld" instance=ExtResource("11_ruhgt")]
-position = Vector2(1444, 486)
+[node name="FlySpawns" type="Node2D" parent="Overworld"]
+
+[node name="Marker2D" type="Marker2D" parent="Overworld/FlySpawns"]
+position = Vector2(711, 383)
+
+[node name="Marker2D2" type="Marker2D" parent="Overworld/FlySpawns"]
+position = Vector2(1171, 558)
+
+[node name="Marker2D3" type="Marker2D" parent="Overworld/FlySpawns"]
+position = Vector2(883, 413)
+
+[node name="Marker2D4" type="Marker2D" parent="Overworld/FlySpawns"]
+position = Vector2(1144, 310)
+
+[node name="Marker2D5" type="Marker2D" parent="Overworld/FlySpawns"]
+position = Vector2(1036, 568)
+
+[node name="Marker2D6" type="Marker2D" parent="Overworld/FlySpawns"]
+position = Vector2(815, 665)
+
+[node name="Marker2D7" type="Marker2D" parent="Overworld/FlySpawns"]
+position = Vector2(756, 271)
+
+[node name="SlimeSpawns" type="Node2D" parent="Overworld"]
+
+[node name="Marker2D" type="Marker2D" parent="Overworld/SlimeSpawns"]
+position = Vector2(1531, 504)
+
+[node name="Marker2D2" type="Marker2D" parent="Overworld/SlimeSpawns"]
+position = Vector2(1115, 443)
+
+[node name="Marker2D3" type="Marker2D" parent="Overworld/SlimeSpawns"]
+position = Vector2(1693, 544)
+
+[node name="Marker2D4" type="Marker2D" parent="Overworld/SlimeSpawns"]
+position = Vector2(1628, 301)
+
+[node name="Marker2D5" type="Marker2D" parent="Overworld/SlimeSpawns"]
+position = Vector2(795, 495)
+
+[node name="RockSpawnsField" type="Node2D" parent="Overworld"]
+script = ExtResource("10_frj6f")
+
+[node name="Marker2D" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(726, 581)
+
+[node name="Marker2D2" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(632, 243)
+
+[node name="Marker2D3" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(1243, 543)
+
+[node name="Marker2D4" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(1244, 598)
+
+[node name="Marker2D5" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(895, 575)
+
+[node name="Marker2D6" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(957, 188)
+
+[node name="Marker2D7" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(889, 292)
+
+[node name="Marker2D8" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(1012, 404)
+
+[node name="Marker2D9" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(972, 645)
+
+[node name="Marker2D10" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(602, 574)
+
+[node name="Marker2D11" type="Marker2D" parent="Overworld/RockSpawnsField"]
+position = Vector2(852, 163)
+
+[node name="RockSpawnsNearCave" type="Node2D" parent="Overworld"]
+script = ExtResource("10_frj6f")
+spawn_chance = 0.7
+
+[node name="Marker2D" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1251, 347)
+
+[node name="Marker2D2" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1628, 479)
+
+[node name="Marker2D3" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1754, 341)
+
+[node name="Marker2D4" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1633, 608)
+
+[node name="Marker2D5" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1571, 604)
+
+[node name="Marker2D6" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1700, 290)
+
+[node name="Marker2D7" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1448, 534)
+
+[node name="Marker2D8" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1634, 419)
+
+[node name="Marker2D9" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1440, 356)
+
+[node name="Marker2D10" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1506, 419)
+
+[node name="Marker2D11" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1371, 352)
+
+[node name="Marker2D12" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1376, 417)
+
+[node name="Marker2D13" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1313, 284)
+
+[node name="Marker2D14" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1311, 225)
+
+[node name="Marker2D15" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1368, 289)
+
+[node name="Marker2D16" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1441, 289)
+
+[node name="Marker2D17" type="Marker2D" parent="Overworld/RockSpawnsNearCave"]
+position = Vector2(1571, 545)
+
+[node name="CoalSpawns" type="Node2D" parent="Overworld"]
+script = ExtResource("12_5ywd0")
+
+[node name="Marker2D" type="Marker2D" parent="Overworld/CoalSpawns"]
+position = Vector2(1633, 673)
+
+[node name="Marker2D2" type="Marker2D" parent="Overworld/CoalSpawns"]
+position = Vector2(1757, 474)
+
+[node name="Marker2D3" type="Marker2D" parent="Overworld/CoalSpawns"]
+position = Vector2(1576, 352)
+
+[node name="Marker2D4" type="Marker2D" parent="Overworld/CoalSpawns"]
+position = Vector2(1692, 673)
+
+[node name="Marker2D5" type="Marker2D" parent="Overworld/CoalSpawns"]
+position = Vector2(1627, 222)
 
 [node name="Player" parent="." instance=ExtResource("4_4qah8")]
 z_index = 1
@@ -177,8 +274,18 @@ position = Vector2(241, 331)
 [node name="Flashlight" parent="Player/PlayerSprite" index="1"]
 toggled = false
 
+[node name="WarpParticles" parent="Player/PlayerSprite" index="7"]
+initial_velocity_max = 35.0
+scale_amount_min = 8.0
+scale_amount_max = 8.0
+color = Color(0, 0.764706, 0, 1)
+
 [node name="CollisionShape2D" parent="Player" index="1"]
 position = Vector2(0, 11)
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("15_mupun")
+volume_db = 3.0
 
 [node name="Ship" parent="." instance=ExtResource("10_87cvs")]
 position = Vector2(208, 318)
@@ -227,9 +334,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -180.0
+offset_left = 120.0
 offset_top = -80.0
-offset_right = 100.0
+offset_right = 400.0
 offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
@@ -388,6 +495,10 @@ theme_override_font_sizes/font_size = 16
 text = "0"
 horizontal_alignment = 2
 
+[node name="GameOverSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("24_c1yaq")
+volume_db = 6.0
+
 [connection signal="pressed_exit_button" from="PauseMenu" to="." method="_on_pause_menu_pressed_exit_button"]
 [connection signal="pressed_resume_button" from="PauseMenu" to="." method="_on_pause_menu_pressed_resume_button"]
 [connection signal="visibility_changed" from="PauseMenu" to="." method="_on_pause_menu_visibility_changed"]
@@ -395,14 +506,17 @@ horizontal_alignment = 2
 [connection signal="clock_updated" from="Clock" to="Overworld" method="_on_clock_updated"]
 [connection signal="player_entered" from="Overworld/ToCave" to="." method="_on_scene_transition_area_player_entered"]
 [connection signal="finished" from="Overworld/WindSFX" to="Overworld" method="_on_wind_sfx_finished"]
+[connection signal="health_changed" from="Player" to="HUD" method="_on_player_health_changed"]
 [connection signal="is_speedy" from="Player" to="HUD" method="_on_player_is_speedy"]
 [connection signal="light_toggled" from="Player" to="HUD" method="_on_player_light_toggled"]
 [connection signal="power_changed" from="Player" to="." method="_on_player_power_changed"]
+[connection signal="stopped_charging" from="Player" to="Clock" method="_on_player_stopped_charging"]
 [connection signal="stopped_charging" from="Player" to="ShipUI" method="_on_player_stopped_charging"]
 [connection signal="used_item" from="Player" to="InventoryUI" method="_on_player_used_item"]
 [connection signal="player_warped" from="Player/PlayerSprite/WarpItem" to="." method="_on_player_warped"]
 [connection signal="entity_died" from="Player/HealthComponent" to="." method="_on_player_died"]
 [connection signal="health_changed" from="Player/HealthComponent" to="Player" method="_on_health_component_health_changed"]
+[connection signal="charging_items" from="Ship" to="Clock" method="_on_ship_charging_items"]
 [connection signal="charging_items" from="Ship" to="Player" method="_on_ship_charging_items"]
 [connection signal="charging_items" from="Ship" to="ShipUI" method="_on_ship_charging_items"]
 [connection signal="left_moon" from="Ship" to="." method="_on_ship_left_moon"]

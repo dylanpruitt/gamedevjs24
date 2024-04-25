@@ -1,0 +1,119 @@
+[gd_scene load_steps=17 format=3 uid="uid://du264nn1jlbp1"]
+
+[ext_resource type="Script" path="res://entities/turret/turret.gd" id="1_enqia"]
+[ext_resource type="PackedScene" uid="uid://wniglcht6m3o" path="res://components/health_component.tscn" id="1_sm3tt"]
+[ext_resource type="Texture2D" uid="uid://dcgwdi2g8leue" path="res://assets/fly_death.png" id="2_auxde"]
+[ext_resource type="Texture2D" uid="uid://dsou4ttc3asf" path="res://assets/turret_base.png" id="3_ctonq"]
+[ext_resource type="AudioStream" uid="uid://by7qkjuabepi0" path="res://assets/sfx/fly.ogg" id="5_2yqyy"]
+[ext_resource type="AudioStream" uid="uid://chcdwl2dtydqa" path="res://assets/sfx/metal_hit.ogg" id="5_04twp"]
+[ext_resource type="Texture2D" uid="uid://tslfhqs5oq5l" path="res://assets/turret_arm.png" id="6_t5c67"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75nmk"]
+atlas = ExtResource("2_auxde")
+region = Rect2(0, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sap5w"]
+atlas = ExtResource("2_auxde")
+region = Rect2(13, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j0dxj"]
+atlas = ExtResource("2_auxde")
+region = Rect2(26, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7j4xv"]
+atlas = ExtResource("2_auxde")
+region = Rect2(39, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7jufs"]
+atlas = ExtResource("2_auxde")
+region = Rect2(52, 0, 13, 5)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_btgqe"]
+atlas = ExtResource("3_ctonq")
+region = Rect2(0, 0, 13, 13)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0kben"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75nmk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sap5w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j0dxj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7j4xv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7jufs")
+}],
+"loop": true,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_btgqe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bfd76"]
+radius = 6.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wn1k7"]
+size = Vector2(277, 254)
+
+[node name="Turret" type="RigidBody2D"]
+mass = 5.0
+gravity_scale = 0.0
+freeze = true
+script = ExtResource("1_enqia")
+
+[node name="HealthComponent" parent="." instance=ExtResource("1_sm3tt")]
+health = 20.0
+immune_to = Array[int]([0])
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_0kben")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(4, 4)
+shape = SubResource("CircleShape2D_bfd76")
+
+[node name="HurtSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_04twp")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+
+[node name="AggroRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AggroRange"]
+shape = SubResource("RectangleShape2D_wn1k7")
+
+[node name="AggroSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_2yqyy")
+volume_db = -3.0
+max_distance = 500.0
+attenuation = 1.68179
+
+[node name="Arm" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Arm"]
+position = Vector2(18, 0)
+scale = Vector2(4, 4)
+texture = ExtResource("6_t5c67")
+
+[node name="Marker2D" type="Marker2D" parent="Arm"]
+position = Vector2(46, 0)
+scale = Vector2(2, 2)
+
+[connection signal="entity_died" from="HealthComponent" to="." method="_on_entity_died"]
+[connection signal="health_changed" from="HealthComponent" to="." method="_on_health_changed"]

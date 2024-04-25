@@ -3,11 +3,15 @@ extends AnimatedSprite2D
 signal drain_power(power)
 
 @export var sword_cooldown_seconds = 0.2
+@export var sword_damage = 3
+var sword_knockback_force = 30000
 var swinging_sword = false
 var in_use = false
 var fixed_angle = false
 
 func _ready():
+	if GlobalVariables.has_sword_upgrade:
+		sword_damage += 2
 	hide()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,3 +38,15 @@ func use(_delta, power):
 	await $Cooldown.timeout
 	in_use = false
 	fixed_angle = false
+
+
+func _on_hitbox_body_entered(body):
+	if not in_use:
+		return
+
+	if body.name != "Player" and body.has_node("HealthComponent"):
+		var health_component = body.get_node("HealthComponent")
+		health_component.take_damage(sword_damage, GlobalVariables.DamageTypes.SWORD)
+
+		var direction = get_parent().get_parent().position.direction_to(body.position)
+		body.apply_force(direction * (sword_knockback_force / body.mass))

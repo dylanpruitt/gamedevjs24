@@ -18,11 +18,12 @@ theme_override_font_sizes/font_size = 64
 text = "Credits"
 
 [node name="Label2" type="Label" parent="."]
-offset_left = 352.0
-offset_top = 198.0
-offset_right = 607.0
-offset_bottom = 221.0
-text = "Game by Dylan Pruitt (dpplasma)"
+offset_left = 212.5
+offset_top = 155.0
+offset_right = 467.5
+offset_bottom = 178.0
+theme_override_font_sizes/font_size = 24
+text = "Game by dpplasma"
 
 [node name="Button" type="Button" parent="."]
 anchors_preset = 7
@@ -38,5 +39,66 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 48
 text = "Back to title"
+
+[node name="Label3" type="Label" parent="."]
+offset_left = 212.5
+offset_top = 196.0
+offset_right = 467.5
+offset_bottom = 219.0
+text = "Sprites/Music by dpplasma"
+
+[node name="Label4" type="Label" parent="."]
+offset_left = 212.5
+offset_top = 224.0
+offset_right = 467.5
+offset_bottom = 247.0
+text = "Special thanks to Devon Conn"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -267.5
+offset_top = -86.0
+offset_right = 267.5
+offset_bottom = 234.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label5" type="Label" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Bricks/Stones/Rocks/Gravel Falling by iwanPlays at https://freesound.org/s/567249/ (modified; licensed under Creative Commons 0)
+rockfall2a.wav by AlanCat at https://freesound.org/s/389303/ (licensed under Creative Commons 0)
+Rocks.wav by adamgryu at https://freesound.org/s/336023/(licensed under Creative Commons 0)
+Falling Rock.wav by spookymodem at https://freesound.org/s/202098/ (licensed under Creative Commons 0)
+Switch 08.WAV by VKProduktion at https://freesound.org/s/217498/ (modified; licensed under Creative Commons 0)
+Item Pickup by TreasureSounds at https://freesound.org/s/332629/ (modified; licensed under Attribution 4.0)
+Typewriter.mp3 by pakasit21 at https://freesound.org/s/138049/ (modified; licensed under Creative Commons 0)
+Cha Ching.wav by deleted_user_96253 at https://freesound.org/s/351304/ (modified; licensed under Creative Commons 0)
+Swosh Sword Swing by qubodup at https://freesound.org/s/59992/ (modified; licensed under Creative Commons 0)
+Old Church Bell.wav by dsp9000 at https://freesound.org/s/76405/ (modified; licensed under Creative Commons 0)
+Good! by syseQ at https://freesound.org/s/267528/ (modified; licensed under Creative Commons 0)
+Running on ground by Disagree at https://freesound.org/s/433725/ (modified; licensed under Attribution 4.0)
+flash.wav by edwin_p_manchester at https://freesound.org/s/2014/ (modified; licensed under Attribution 3.0)
+boom4.wav by NoiseCollector at https://freesound.org/s/6722/ (modified; licensed under Attribution 3.0)
+fuse2.wav by j1987 at https://freesound.org/s/140715/ (modified; licensed under Creative Commons 0)
+wind.ogg by sleepCircle at https://freesound.org/s/22331/ (modified; licensed under Creative Commons 0)
+Water Dripping in Cave.wav by Sclolex at https://freesound.org/s/177958/ (modified; licensed under Creative Commons 0)
+Wrong Answer by -Andreas at https://freesound.org/s/648462/ (modified; licensed under Creative Commons 0)
+teleport.mp3 by outroelison at https://freesound.org/s/150950/ (modified; licensed under Creative Commons 0)
+Life Lost Game Over by noirenex at https://freesound.org/s/159408/ (modified; licensed under Creative Commons 0)
+8 Bit Slam by Jofae at https://freesound.org/s/361636/ (modified; licensed under Creative Commons 0)
+Damage sound effect by Raclure at https://freesound.org/s/458867/ (modified; licensed under Creative Commons 0)"
+autowrap_mode = 2
+
+[node name="Label5" type="Label" parent="."]
+offset_left = 212.5
+offset_top = 270.0
+offset_right = 467.5
+offset_bottom = 293.0
+text = "SFX Credits"
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

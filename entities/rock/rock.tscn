@@ -27,7 +27,7 @@ scale = Vector2(4, 4)
 texture = ExtResource("2_gfpic")
 
 [node name="HealthComponent" parent="." instance=ExtResource("1_sqinb")]
-health = 120
+health = 24
 immune_to = Array[int]([1])
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]

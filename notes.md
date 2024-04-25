@@ -93,17 +93,43 @@ shop adds to items now
 
 (6-7 hours so far)
 
-TODO cave gen
+##### 04/23
+added warp particles/ui/sfx
+added player death sprite
+reworked drill to use hitbox instead of raycast2d (not sure what i was on there)
+updated drill code / rock health so bombs oneshot big rocks/iron now too
+added basic slime enemy (no ai, just testing)
+finished basic slime ai
+a lot of small "feel" updates
+finished basic fly
+added spawns to overworld/cave
+shop upgrades
 
-TODO today: start making world?
-TODO: test enemy?
+(8-9 hours so far)
+
+##### 04/24
+global variables for upgrades reset now in reset_variables()
+
+##### 04/25
+dawn of the final day
+flashlight HUD icon should shut off when power runs out
+flashlight toggles off when using different item
+dynamic rock spawns in overworld
+point light at cave entrance
+ship noise doesn't play in cave now
+basic timeskip with charging
+UI for mined rocks
+credits.md is done
+upgrade icons in shop
+credits page is DONE
+
+(4-5 hours so far)
+
 TODO: medkit pickup
-TODO: add dead player sprite
 TODO: queue free mobs/explosions/etc on death
 TODO: add few seconds wait before missing? / killed screen transition
-TODO: finish out credits page
 TODO: work on day theme
-TODO: warp particles/sfx
+
 
 TODO pause menu [x]
 player movement?
